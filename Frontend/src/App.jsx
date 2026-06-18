@@ -1,13 +1,16 @@
-import HomeChauffeur from "./Pages/Accueilchauffeur";
-import Declaration from "./Pages/Declaration";
-import "./App.css";
+import AccueilBackOffice from "./Pages/AccueilBackOffice";
+
+const globalStyle = document.createElement("style");
+globalStyle.innerHTML = `
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body, #root { width: 100%; min-height: 100vh; }
+`;
+document.head.appendChild(globalStyle);
 
 function App() {
   return (
     <>
-      {/* On affiche directement le formulaire de déclaration au démarrage */}
-      <HomeChauffeur />
-      <Declaration />
+      <AccueilBackOffice />
     </>
   );
 }
