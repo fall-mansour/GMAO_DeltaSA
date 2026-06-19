@@ -36,15 +36,16 @@ body,
   position: sticky;
   top: 0;
   z-index: 10;
-  flex-shrink: 0; /* empêche le header de rétrécir */
+  flex-shrink: 0;
 }
 
-.logo-text {
-  font-family: "Syne", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #2b7fd4;
-  letter-spacing: -0.02em;
+/* ── LOGO IMAGE ──────────────────────────────────────────── */
+.header-logo {
+  height: 60px; /* s'adapte à la hauteur du header */
+  width: auto; /* ratio préservé, pas d'étirement */
+  max-width: 190px; /* empêche tout débordement sur petit écran */
+  object-fit: contain;
+  display: block;
 }
 
 .nav-links {
@@ -99,10 +100,10 @@ body,
 /* ── BODY — prend tout l'espace restant ──────────────────── */
 .dashboard-body {
   flex: 1;
-  overflow-y: auto; /* scroll interne si le contenu déborde */
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centre verticalement le contenu */
+  justify-content: center;
   align-items: center;
   gap: 2.5rem;
   padding: 3rem 2rem;
@@ -253,6 +254,10 @@ body,
     padding: 1rem 1.5rem;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .header-logo {
+    height: 28px; /* légèrement réduit sur mobile */
   }
 
   .actions-grid {

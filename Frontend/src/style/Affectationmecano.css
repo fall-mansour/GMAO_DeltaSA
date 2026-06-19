@@ -1,0 +1,184 @@
+/* Frontend/src/style/AffectationsMecano.css */
+
+/* Conteneur principal */
+.affectations-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff; /* Fond blanc pur */
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* En-tête */
+.affectations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid #eef4fb;
+  padding-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+.header-title-area h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #1a2d42;
+  margin: 0 0 0.4rem 0;
+}
+
+.header-title-area p {
+  color: #6b8bad;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Compteur de tâches */
+.header-badge-count {
+  background-color: #f4f8fc;
+  border: 1.5px solid #c5ddef;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.badge-number {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2b7fd4;
+  line-height: 1;
+}
+
+.badge-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b8bad;
+  margin-top: 0.2rem;
+}
+
+/* Structure de la Table */
+.table-wrapper {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1.5px solid #c5ddef;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(149, 157, 165, 0.01);
+}
+
+.affectations-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.affectations-table th {
+  background-color: #f4f8fc;
+  color: #6b8bad;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 1rem 1.5rem;
+  border-bottom: 1.5px solid #c5ddef;
+}
+
+.affectations-table td {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1.5px solid #eef4fb;
+  color: #1a2d42;
+  vertical-align: middle;
+}
+
+/* Effet de survol sur les lignes */
+.affectations-table tbody tr:hover {
+  background-color: #f4f8fc;
+}
+
+/* Cellules spécifiques */
+.vehicle-badge {
+  background-color: #eef4fb;
+  color: #2b7fd4;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #c5ddef;
+  display: inline-block;
+  whitespace: nowrap;
+}
+
+.driver-cell strong {
+  font-weight: 600;
+  color: #1a2d42;
+}
+
+.desc-text {
+  margin: 0;
+  color: #516d8a;
+  line-height: 1.5;
+  max-width: 450px;
+}
+
+.date-cell {
+  color: #6b8bad;
+  font-weight: 500;
+}
+
+/* Alignements et messages vides */
+.text-center {
+  text-align: center;
+}
+
+.empty-table {
+  text-align: center;
+  padding: 3rem !important;
+  color: #6b8bad;
+  font-style: italic;
+}
+
+/* Lien de retour */
+.back-link-wrapper {
+  margin-top: 1rem;
+}
+
+.back-link {
+  color: #2b7fd4;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #1c6bbf;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .affectations-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .header-badge-count {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}

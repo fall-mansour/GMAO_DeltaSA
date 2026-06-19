@@ -1,0 +1,202 @@
+/* Frontend/src/style/AccueilMecano.css */
+
+/* ── CONTENEUR PRINCIPAL ── */
+.mecano-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* ── EN-TÊTE IMMERSIF ATELIER ── */
+.mecano-custom-header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1.5px solid #c5ddef;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-sizing: border-box;
+}
+
+.mecano-profile-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.mecano-avatar {
+  width: 56px;
+  height: 56px;
+  background-color: #f4f8fc;
+  border: 1.5px solid #c5ddef;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.mecano-welcome-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.mecano-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mecano-header-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #1a2d42;
+  margin: 0;
+}
+
+.mecano-status-badge {
+  background-color: #eef4fb;
+  color: #2b7fd4;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  border: 1px solid #c5ddef;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.mecano-header-subtitle {
+  color: #6b8bad;
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* ── MINI CARTES DE STATUT (DROITE) ── */
+.mecano-stats-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.mecano-mini-card {
+  background-color: #f4f8fc;
+  border: 1.5px solid #c5ddef;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 100px;
+  box-sizing: border-box;
+}
+
+.mecano-stat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b8bad;
+}
+
+.mecano-stat-value {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.1rem;
+  color: #1e7e34;
+  font-weight: 700;
+  margin-top: 0.2rem;
+}
+
+/* ── GRILLE ET CARTES DE REDIRECTION ── */
+.mecano-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mecano-menu-card {
+  background-color: #ffffff;
+  border: 1.5px solid #c5ddef;
+  border-radius: 12px;
+  padding: 2.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Effets de survol sur les cartes */
+.mecano-menu-card:hover {
+  border-color: #2b7fd4;
+  background-color: #f4f8fc;
+  transform: translateY(-3px);
+}
+
+.mecano-card-icon {
+  font-size: 2rem;
+}
+
+.mecano-card-title {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #1a2d42;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.mecano-card-description {
+  margin: 0;
+  color: #6b8bad;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.mecano-card-link {
+  margin: 0;
+  margin-top: auto;
+  color: #2b7fd4;
+  font-weight: 600;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.mecano-menu-card:hover .mecano-card-link {
+  color: #1c6bbf;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .mecano-custom-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .mecano-stats-wrapper {
+    width: 100%;
+  }
+  .mecano-mini-card {
+    align-items: flex-start;
+    flex: 1;
+  }
+}

@@ -91,7 +91,6 @@ function formatFCFA(valeur) {
 }
 
 export default function MaintenanceHome({
-  userName = "Responsable",
   userInitials = "RM",
   declarations = null,
   interventions = null,
