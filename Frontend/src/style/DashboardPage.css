@@ -1,0 +1,212 @@
+/* ============================================================
+   DashboardPage.css
+   Page Tableau de bord - Responsable de maintenance - GMAO Delta SA
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.db-page {
+  font-family: "Segoe UI", Arial, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background: #eef3fb;
+  color: #1a1f29;
+}
+
+/* ---------- HEADER (reprend le style de MaintenanceHome) ---------- */
+
+.db-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f3;
+  padding: 22px 56px;
+}
+
+
+.mh-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+
+.brand-logo {
+  height: 89px;
+  display: block;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 26px;
+  background: #d7dbe2;
+}
+
+
+.db-brand-suffix {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.db-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid #e2e8f3;
+  color: #1d6fd9;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.db-back:hover {
+  background: #f3f8fe;
+}
+
+/* ---------- CONTENU ---------- */
+
+.db-content {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 56px 56px 100px;
+}
+
+.db-heading-row {
+  margin-bottom: 40px;
+}
+
+.db-eyebrow {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1d6fd9;
+  margin: 0 0 10px;
+}
+
+.db-title {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0;
+  color: #11151b;
+}
+
+/* ---------- BLOC CHIFFRES CLES ---------- */
+
+.db-counts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-bottom: 36px;
+}
+
+.db-count-card {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 16px;
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.db-count-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #5b6477;
+}
+
+.db-count-value {
+  font-size: 34px;
+  font-weight: 800;
+  color: #11151b;
+}
+
+.db-count-sub {
+  font-size: 13px;
+  color: #8a90a0;
+}
+
+/* ---------- GRILLE DE GRAPHIQUES ---------- */
+
+.db-charts-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.db-chart-card {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 18px;
+  padding: 32px;
+}
+
+.db-chart-card.full {
+  grid-column: 1 / -1;
+}
+
+.db-chart-head {
+  margin-bottom: 22px;
+}
+
+.db-chart-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #11151b;
+}
+
+.db-chart-sub {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.db-chart-body {
+  position: relative;
+  height: 280px;
+}
+
+.db-chart-body.donut {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1200px) {
+  .db-counts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .db-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .db-content {
+    padding: 32px 20px;
+  }
+
+  .db-counts {
+    grid-template-columns: 1fr;
+  }
+}
