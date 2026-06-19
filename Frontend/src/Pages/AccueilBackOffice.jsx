@@ -1,62 +1,50 @@
 import { useState } from "react";
-
-const stats = [
-  { label: "Véhicules concernés", value: 12, icon: "🚛", color: "#1d6fd8" },
-  { label: "Pannes en attente", value: 5, icon: "⏳", color: "#e6a817" },
-  { label: "En cours", value: 4, icon: "🔧", color: "#2563eb" },
-  { label: "Coût total (FCFA)", value: "2 450 000", icon: "💰", color: "#16a34a" },
-];
+import { useNavigate } from "react-router-dom";
 
 const actions = [
   {
     icon: "✅",
-    title: "Valider les pannes",
-    description:
-      "Consultez les demandes soumises par les chauffeurs et validez ou rejetez les interventions.",
+    title: "Valider les déclarations",
+    description: "Consultez les demandes soumises par les chauffeurs et validez les interventions.",
     buttonLabel: "VOIR LES DEMANDES",
     filled: true,
   },
   {
     icon: "📋",
-    title: "Listing des pannes",
-    description:
-      "Accédez à l'historique complet des pannes : traitées, en cours, avec dates et actions menées.",
+    title: "Historique des pannes",
+    description: "Accédez à l'historique complet des pannes : traitées, en cours, avec dates et actions menées.",
     buttonLabel: "VOIR LE LISTING",
     filled: false,
   },
   {
-    icon: "📊",
-    title: "Dashboard KPI",
-    description:
-      "Visualisez les indicateurs clés : nombre de véhicules, coûts globaux et état des interventions.",
-    buttonLabel: "OUVRIR LE DASHBOARD",
-    filled: false,
-  },
-  {
-    icon: "👥",
-    title: "Gestion des utilisateurs",
-    description:
-      "Gérez les comptes chauffeurs, chargés de maintenance et planificateurs de votre équipe.",
-    buttonLabel: "GÉRER LES COMPTES",
+    icon: "📄",
+    title: "Rapports",
+    description: "Consultez et téléchargez les rapports générés après validation des interventions.",
+    buttonLabel: "VOIR LES RAPPORTS",
     filled: false,
   },
 ];
 
-export default function BackOfficeHome() {
+export default function AccueilBackOffice() {
   const [activeNav, setActiveNav] = useState("Accueil");
+  const navigate = useNavigate();
+  const navItems = ["Accueil", "Historiques", "Validation", "Rapports"];
 
-  const navItems = ["Accueil", "Pannes", "Validation", "Rapports", "Utilisateurs"];
+  const handleNav = (item) => {
+    setActiveNav(item);
+    if (item === "Accueil") navigate("/");
+    if (item === "Rapports") navigate("/rapports");
+  };
 
   return (
     <div style={styles.page}>
-      {/* NAVBAR */}
       <nav style={styles.navbar}>
-        <span style={styles.logo}>Delta SA</span>
+        <img src="/logo.jpeg" alt="Delta SA" style={styles.logo} />
         <div style={styles.navLinks}>
           {navItems.map((item) => (
             <button
               key={item}
-              onClick={() => setActiveNav(item)}
+              onClick={() => handleNav(item)}
               style={{
                 ...styles.navLink,
                 ...(activeNav === item ? styles.navLinkActive : {}),
@@ -68,44 +56,39 @@ export default function BackOfficeHome() {
           ))}
         </div>
         <div style={styles.avatarWrapper}>
-          <div style={styles.avatar}>AD</div>
-          <span style={styles.avatarName}>Admin</span>
+          <div style={styles.avatar}>BO</div>
+          <button style={styles.btnDeconnexion}>Déconnexion</button>
         </div>
       </nav>
 
-      {/* HERO */}
       <div style={styles.hero}>
-        <h1 style={styles.heroTitle}>Bonjour, Administrateur !</h1>
+        <h1 style={styles.heroTitle}>Bonjour, BackOffice !</h1>
         <p style={styles.heroSubtitle}>
           Espace Back-Office · Gérez, validez et suivez toutes les opérations de maintenance.
         </p>
       </div>
 
-      {/* KPI CARDS */}
-      <div style={styles.kpiGrid}>
-        {stats.map((s) => (
-          <div key={s.label} style={styles.kpiCard}>
-            <span style={styles.kpiIcon}>{s.icon}</span>
-            <span style={{ ...styles.kpiValue, color: s.color }}>{s.value}</span>
-            <span style={styles.kpiLabel}>{s.label}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* ACTION CARDS */}
       <div style={styles.actionGrid}>
-        {actions.map((a) => (
-          <div key={a.title} style={styles.actionCard}>
-            <span style={styles.actionIcon}>{a.icon}</span>
-            <h2 style={styles.actionTitle}>{a.title}</h2>
-            <p style={styles.actionDesc}>{a.description}</p>
-            <button
-              style={a.filled ? styles.btnFilled : styles.btnOutline}
-            >
-              {a.buttonLabel}
-            </button>
-          </div>
-        ))}
+        <div style={styles.actionCard}>
+          <span style={styles.actionIcon}>{actions[0].icon}</span>
+          <h2 style={styles.actionTitle}>{actions[0].title}</h2>
+          <p style={styles.actionDesc}>{actions[0].description}</p>
+          <button style={styles.btnFilled}>{actions[0].buttonLabel}</button>
+        </div>
+        <div style={styles.actionCard}>
+          <span style={styles.actionIcon}>{actions[1].icon}</span>
+          <h2 style={styles.actionTitle}>{actions[1].title}</h2>
+          <p style={styles.actionDesc}>{actions[1].description}</p>
+          <button style={styles.btnOutline}>{actions[1].buttonLabel}</button>
+        </div>
+        <div style={{ ...styles.actionCard, ...styles.cardCentered }}>
+          <span style={styles.actionIcon}>{actions[2].icon}</span>
+          <h2 style={styles.actionTitle}>{actions[2].title}</h2>
+          <p style={styles.actionDesc}>{actions[2].description}</p>
+          <button style={styles.btnOutline} onClick={() => navigate("/rapports")}>
+            {actions[2].buttonLabel}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -114,11 +97,13 @@ export default function BackOfficeHome() {
 const styles = {
   page: {
     minHeight: "100vh",
+    width: "100vw",
+    margin: 0,
+    padding: 0,
     backgroundColor: "#EEF3FB",
     fontFamily: "'Segoe UI', sans-serif",
+    boxSizing: "border-box",
   },
-
-  /* Navbar */
   navbar: {
     display: "flex",
     alignItems: "center",
@@ -130,12 +115,13 @@ const styles = {
     position: "sticky",
     top: 0,
     zIndex: 100,
+    width: "100%",
+    boxSizing: "border-box",
   },
   logo: {
-    fontSize: "20px",
-    fontWeight: "700",
-    color: "#1d4ed8",
-    letterSpacing: "-0.5px",
+    height: "80px",
+    width: "auto",
+    objectFit: "contain",
   },
   navLinks: {
     display: "flex",
@@ -182,13 +168,17 @@ const styles = {
     fontWeight: "700",
     fontSize: "14px",
   },
-  avatarName: {
-    fontSize: "15px",
+  btnDeconnexion: {
+    backgroundColor: "#1d4ed8",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "8px",
+    padding: "8px 16px",
     fontWeight: "600",
-    color: "#1e293b",
+    fontSize: "14px",
+    cursor: "pointer",
+    fontFamily: "'Segoe UI', sans-serif",
   },
-
-  /* Hero */
   hero: {
     textAlign: "center",
     padding: "48px 24px 24px",
@@ -204,47 +194,15 @@ const styles = {
     color: "#64748b",
     margin: 0,
   },
-
-  /* KPI */
-  kpiGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "16px",
-    maxWidth: "960px",
-    margin: "24px auto 0",
-    padding: "0 24px",
-  },
-  kpiCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: "14px",
-    padding: "20px 16px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "6px",
-    boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-  },
-  kpiIcon: {
-    fontSize: "24px",
-  },
-  kpiValue: {
-    fontSize: "26px",
-    fontWeight: "700",
-  },
-  kpiLabel: {
-    fontSize: "12px",
-    color: "#64748b",
-    textAlign: "center",
-  },
-
-  /* Action cards */
   actionGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
     gap: "20px",
-    maxWidth: "960px",
+    maxWidth: "1200px",
+    width: "100%",
     margin: "32px auto 48px",
-    padding: "0 24px",
+    padding: "0 40px",
+    boxSizing: "border-box",
   },
   actionCard: {
     backgroundColor: "#ffffff",
@@ -256,6 +214,12 @@ const styles = {
     gap: "12px",
     textAlign: "center",
     boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+  },
+  cardCentered: {
+    gridColumn: "1 / -1",
+    maxWidth: "560px",
+    width: "100%",
+    margin: "0 auto",
   },
   actionIcon: {
     fontSize: "36px",
