@@ -14,6 +14,8 @@ import {
 import Declaration from "./Pages/Declaration";
 import HomeMecano from "./Pages/Accueilmecano";
 import AffectationsMecano from "./Pages/AffectationMecano";
+import AccueilBackOffice from "./Pages/AccueilBackOffice";
+import Rapports from "./Pages/Rapports";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/validation" element={<ValidationListe />} />
         <Route path="/HistoBackoff" element={<HistoriqueBackoffice />} />
         <Route path="/Declaration" element={<Declaration />} />
+        <Route path="/Accueilbackoff" element={<AccueilBackOffice />} />
+        <Route path="/Rapport" element={<Rapports />} />
         /*Route page de connexion */
         <Route path="/login" element={<Login />} />
         /*Route mecano */

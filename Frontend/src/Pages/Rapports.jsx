@@ -1,15 +1,47 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const rapportsMock = [
-  { id: 1, vehicule: "Hydrocureur H-01", date: "2026-06-10", intervention: "Remplacement pompe" },
-  { id: 2, vehicule: "Benne B-03", date: "2026-06-12", intervention: "Réparation frein" },
-  { id: 3, vehicule: "Hydrocureur H-02", date: "2026-06-13", intervention: "Vidange moteur" },
-  { id: 4, vehicule: "Camion C-05", date: "2026-06-15", intervention: "Changement pneus" },
-  { id: 5, vehicule: "Benne B-01", date: "2026-06-16", intervention: "Réparation carrosserie" },
+const rapports = [
+  {
+    id: 1,
+    vehicule: "Hydrocureur H-01",
+    date: "2026-06-10",
+    intervention: "Remplacement pompe",
+  },
+  {
+    id: 2,
+    vehicule: "Benne B-03",
+    date: "2026-06-12",
+    intervention: "Réparation frein",
+  },
+  {
+    id: 3,
+    vehicule: "Hydrocureur H-02",
+    date: "2026-06-13",
+    intervention: "Vidange moteur",
+  },
+  {
+    id: 4,
+    vehicule: "Camion C-05",
+    date: "2026-06-15",
+    intervention: "Changement pneus",
+  },
+  {
+    id: 5,
+    vehicule: "Benne B-01",
+    date: "2026-06-16",
+    intervention: "Réparation carrosserie",
+  },
 ];
 
-const vehicules = ["Tous", "Hydrocureur H-01", "Hydrocureur H-02", "Benne B-01", "Benne B-03", "Camion C-05"];
+const vehicules = [
+  "Tous",
+  "Hydrocureur H-01",
+  "Hydrocureur H-02",
+  "Benne B-01",
+  "Benne B-03",
+  "Camion C-05",
+];
 
 export default function Rapports() {
   const [activeNav, setActiveNav] = useState("Rapports");
@@ -19,8 +51,9 @@ export default function Rapports() {
 
   const navItems = ["Accueil", "Historiques", "Validation", "Rapports"];
 
-  const rapportsFiltres = rapportsMock.filter((r) => {
-    const matchVehicule = filtreVehicule === "Tous" || r.vehicule === filtreVehicule;
+  const rapportsFiltres = rapports.filter((r) => {
+    const matchVehicule =
+      filtreVehicule === "Tous" || r.vehicule === filtreVehicule;
     const matchDate = filtreDate === "" || r.date === filtreDate;
     return matchVehicule && matchDate;
   });
@@ -120,7 +153,8 @@ export default function Rapports() {
       <div style={styles.hero}>
         <h1 style={styles.heroTitle}>📄 Rapports d'intervention</h1>
         <p style={styles.heroSubtitle}>
-          Consultez et téléchargez les rapports générés après validation des pannes.
+          Consultez et téléchargez les rapports générés après validation des
+          pannes.
         </p>
       </div>
 
@@ -133,7 +167,9 @@ export default function Rapports() {
             onChange={(e) => setFiltreVehicule(e.target.value)}
           >
             {vehicules.map((v) => (
-              <option key={v} value={v}>{v}</option>
+              <option key={v} value={v}>
+                {v}
+              </option>
             ))}
           </select>
         </div>
@@ -148,14 +184,19 @@ export default function Rapports() {
         </div>
         <button
           style={styles.btnReset}
-          onClick={() => { setFiltreVehicule("Tous"); setFiltreDate(""); }}
+          onClick={() => {
+            setFiltreVehicule("Tous");
+            setFiltreDate("");
+          }}
         >
           Réinitialiser
         </button>
       </div>
 
       <div style={styles.compteurWrapper}>
-        <span style={styles.compteur}>{rapportsFiltres.length} rapport(s) trouvé(s)</span>
+        <span style={styles.compteur}>
+          {rapportsFiltres.length} rapport(s) trouvé(s)
+        </span>
       </div>
 
       <div style={styles.tableWrapper}>
@@ -174,13 +215,19 @@ export default function Rapports() {
             </thead>
             <tbody>
               {rapportsFiltres.map((r, i) => (
-                <tr key={r.id} style={i % 2 === 0 ? styles.trEven : styles.trOdd}>
+                <tr
+                  key={r.id}
+                  style={i % 2 === 0 ? styles.trEven : styles.trOdd}
+                >
                   <td style={styles.td}>{r.id}</td>
                   <td style={styles.td}>{r.vehicule}</td>
                   <td style={styles.td}>{r.date}</td>
                   <td style={styles.td}>{r.intervention}</td>
                   <td style={styles.td}>
-                    <button style={styles.btnDownload} onClick={() => handleDownload(r)}>
+                    <button
+                      style={styles.btnDownload}
+                      onClick={() => handleDownload(r)}
+                    >
                       ⬇ Télécharger
                     </button>
                   </td>
