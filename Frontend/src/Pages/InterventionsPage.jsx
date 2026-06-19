@@ -1,20 +1,6 @@
-import React, { useState } from "react";
 import "../style/InterventionsPage.css";
+import { useState } from "react";
 import logo from "../assets/logo.png";
-
-/**
- * Page Suivi des interventions - Responsable de maintenance
- * Application GMAO - Delta SA
- *
- * Liste verticale des interventions, affichant les attributs de la classe
- * Intervention du diagramme de classes :
- * dateAffectation, dateDebut, dateFin, mecanicien (idMecanicien), cout,
- * detailsReparation, ainsi que le camion et le statut issus de la
- * Declaration associee.
- *
- * Donnees d'exemple affichees tant que le backend n'est pas branche.
- * Brancher en passant la prop `interventions`.
- */
 
 const EXEMPLE_INTERVENTIONS = [
   {
@@ -83,9 +69,9 @@ export default function InterventionsPage({
   return (
     <div className="ip-page">
       <header className="ip-topbar">
-         <div className="mh-brand">
-                            <img src={logo} alt="Delta SA" className="brand-logo" />
-                            <span className="brand-divider" />
+        <div className="mh-brand">
+          <img src={logo} alt="Delta SA" className="brand-logo" />
+          <span className="brand-divider" />
           <span className="ip-brand-suffix">GMAO</span>
         </div>
 
@@ -109,9 +95,7 @@ export default function InterventionsPage({
           {FILTRES.map((f) => (
             <button
               key={f.key}
-              className={`ip-filter-btn${
-                filtre === f.key ? " is-active" : ""
-              }`}
+              className={`ip-filter-btn${filtre === f.key ? " is-active" : ""}`}
               onClick={() => setFiltre(f.key)}
             >
               {f.label}
@@ -126,9 +110,7 @@ export default function InterventionsPage({
                 <div className="ip-card-head">
                   <div className="ip-card-id">
                     <span className="ip-card-truck">{i.camion}</span>
-                    <span className="ip-card-num">
-                      Intervention #{i.id}
-                    </span>
+                    <span className="ip-card-num">Intervention #{i.id}</span>
                   </div>
                   <span className={`ip-pill ip-pill-${i.statut}`}>
                     {i.statutLabel}
@@ -143,9 +125,7 @@ export default function InterventionsPage({
 
                   <div className="ip-attr">
                     <span className="ip-attr-label">Date d'affectation</span>
-                    <span className="ip-attr-value">
-                      {i.dateAffectation}
-                    </span>
+                    <span className="ip-attr-value">{i.dateAffectation}</span>
                   </div>
 
                   <div className="ip-attr">
@@ -179,9 +159,7 @@ export default function InterventionsPage({
                 </div>
 
                 <div className="ip-details">
-                  <p className="ip-details-label">
-                    Détails de la réparation
-                  </p>
+                  <p className="ip-details-label">Détails de la réparation</p>
                   <p
                     className={`ip-details-text${
                       !i.detailsReparation ? " is-muted" : ""
@@ -196,9 +174,7 @@ export default function InterventionsPage({
           </div>
         ) : (
           <div className="ip-empty">
-            <p className="ip-empty-text">
-              Aucune intervention pour ce filtre.
-            </p>
+            <p className="ip-empty-text">Aucune intervention pour ce filtre.</p>
           </div>
         )}
       </main>

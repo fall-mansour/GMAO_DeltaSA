@@ -1,18 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../style/DeclarationsPage.css";
 import logo from "../assets/logo.png";
-/**
- * Page Declarations a traiter - Responsable de maintenance
- * Application GMAO - Delta SA
- *
- * Liste verticale des declarations validees par le back-office, en attente
- * d'affectation. Cliquer sur "Affecter un mecanicien" deplie un formulaire
- * inline dans la carte (mecanicien + cout estime), conformement au flux :
- * Declaration -> genere -> Intervention (idMecanicien, cout).
- *
- * Donnees d'exemple affichees tant que le backend n'est pas branche.
- * Brancher en passant les props `declarations` et `mecaniciens`.
- */
 
 const EXEMPLE_DECLARATIONS = [
   {
@@ -87,11 +75,10 @@ export default function DeclarationsPage({
   return (
     <div className="dp-page">
       <header className="dp-topbar">
-        
-           <div className="mh-brand">
-                    <img src={logo} alt="Delta SA" className="brand-logo" />
-                    <span className="brand-divider" />
-                    
+        <div className="mh-brand">
+          <img src={logo} alt="Delta SA" className="brand-logo" />
+          <span className="brand-divider" />
+
           <span className="dp-brand-suffix">GMAO</span>
         </div>
 
@@ -133,9 +120,7 @@ export default function DeclarationsPage({
 
                     <div className="dp-card-action">
                       <button
-                        className={`dp-btn-assign${
-                          isOpen ? " is-active" : ""
-                        }`}
+                        className={`dp-btn-assign${isOpen ? " is-active" : ""}`}
                         onClick={() => toggleOpen(d.id)}
                       >
                         {isOpen ? "Fermer" : "Affecter un mécanicien"}
@@ -153,11 +138,7 @@ export default function DeclarationsPage({
                           id={`mecano-${d.id}`}
                           value={values.idMecanicien || ""}
                           onChange={(e) =>
-                            updateField(
-                              d.id,
-                              "idMecanicien",
-                              e.target.value
-                            )
+                            updateField(d.id, "idMecanicien", e.target.value)
                           }
                         >
                           <option value="">Sélectionner un mécanicien</option>

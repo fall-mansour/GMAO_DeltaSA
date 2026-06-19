@@ -16,6 +16,10 @@ import HomeMecano from "./Pages/Accueilmecano";
 import AffectationsMecano from "./Pages/AffectationMecano";
 import AccueilBackOffice from "./Pages/AccueilBackOffice";
 import Rapports from "./Pages/Rapports";
+import MaintenanceHome from "./Pages/MaintenanceHome";
+import InterventionsPage from "./Pages/InterventionsPage";
+import DeclarationsPage from "./Pages/DeclarationsPage";
+import DashboardPage from "./Pages/DashboardPage";
 
 function App() {
   return (
@@ -40,6 +44,11 @@ function App() {
         <Route path="/Accueilmeca" element={<HomeMecano />} />
         <Route path="/Affectationsmeca" element={<AffectationsMecano />} />
         <Route path="/Etatreparation" element={<SuiviReparation />} />
+        /*Routes maintenance*/
+        <Route path="/Homemaintenance" element={<MaintenanceHome />} />
+        <Route path="/Interventions" element={<InterventionsPage />} />
+        <Route path="/Declarations" element={<DeclarationsPage />} />
+        <Route path="/Dashboard" element={<DashboardPage />} />
       </Routes>
     </Router>
   );
