@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const actions = [
   {
@@ -16,28 +17,34 @@ const actions = [
     filled: false,
   },
   {
-    icon: "📊",
-    title: "Dashboard KPI",
-    description: "Visualisez les indicateurs clés : nombre de véhicules, coûts globaux et état des interventions.",
-    buttonLabel: "OUVRIR LE DASHBOARD",
+    icon: "📄",
+    title: "Rapports",
+    description: "Consultez et téléchargez les rapports générés après validation des interventions.",
+    buttonLabel: "VOIR LES RAPPORTS",
     filled: false,
   },
 ];
 
 export default function AccueilBackOffice() {
   const [activeNav, setActiveNav] = useState("Accueil");
+  const navigate = useNavigate();
   const navItems = ["Accueil", "Historiques", "Validation", "Rapports"];
+
+  const handleNav = (item) => {
+    setActiveNav(item);
+    if (item === "Accueil") navigate("/");
+    if (item === "Rapports") navigate("/rapports");
+  };
 
   return (
     <div style={styles.page}>
-      {/* NAVBAR */}
       <nav style={styles.navbar}>
         <img src="/logo.jpeg" alt="Delta SA" style={styles.logo} />
         <div style={styles.navLinks}>
           {navItems.map((item) => (
             <button
               key={item}
-              onClick={() => setActiveNav(item)}
+              onClick={() => handleNav(item)}
               style={{
                 ...styles.navLink,
                 ...(activeNav === item ? styles.navLinkActive : {}),
@@ -50,11 +57,10 @@ export default function AccueilBackOffice() {
         </div>
         <div style={styles.avatarWrapper}>
           <div style={styles.avatar}>BO</div>
-          <span style={styles.avatarName}>BackOffice</span>
+          <button style={styles.btnDeconnexion}>Déconnexion</button>
         </div>
       </nav>
 
-      {/* HERO */}
       <div style={styles.hero}>
         <h1 style={styles.heroTitle}>Bonjour, BackOffice !</h1>
         <p style={styles.heroSubtitle}>
@@ -62,7 +68,6 @@ export default function AccueilBackOffice() {
         </p>
       </div>
 
-      {/* ACTION CARDS */}
       <div style={styles.actionGrid}>
         <div style={styles.actionCard}>
           <span style={styles.actionIcon}>{actions[0].icon}</span>
@@ -80,7 +85,9 @@ export default function AccueilBackOffice() {
           <span style={styles.actionIcon}>{actions[2].icon}</span>
           <h2 style={styles.actionTitle}>{actions[2].title}</h2>
           <p style={styles.actionDesc}>{actions[2].description}</p>
-          <button style={styles.btnOutline}>{actions[2].buttonLabel}</button>
+          <button style={styles.btnOutline} onClick={() => navigate("/rapports")}>
+            {actions[2].buttonLabel}
+          </button>
         </div>
       </div>
     </div>
@@ -112,9 +119,9 @@ const styles = {
     boxSizing: "border-box",
   },
   logo: {
-  height: "80px",
-  width: "auto",
-  objectFit: "contain",
+    height: "80px",
+    width: "auto",
+    objectFit: "contain",
   },
   navLinks: {
     display: "flex",
@@ -161,10 +168,16 @@ const styles = {
     fontWeight: "700",
     fontSize: "14px",
   },
-  avatarName: {
-    fontSize: "15px",
+  btnDeconnexion: {
+    backgroundColor: "#1d4ed8",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "8px",
+    padding: "8px 16px",
     fontWeight: "600",
-    color: "#1e293b",
+    fontSize: "14px",
+    cursor: "pointer",
+    fontFamily: "'Segoe UI', sans-serif",
   },
   hero: {
     textAlign: "center",

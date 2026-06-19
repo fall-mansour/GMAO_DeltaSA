@@ -1,17 +1,16 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccueilBackOffice from "./Pages/AccueilBackOffice";
-
-const globalStyle = document.createElement("style");
-globalStyle.innerHTML = `
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body, #root { width: 100%; min-height: 100vh; }
-`;
-document.head.appendChild(globalStyle);
+import Rapports from "./Pages/Rapports";
+import "./App.css";
 
 function App() {
   return (
-    <>
-      <AccueilBackOffice />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AccueilBackOffice />} />
+        <Route path="/rapports" element={<Rapports />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
