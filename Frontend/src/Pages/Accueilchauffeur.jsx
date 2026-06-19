@@ -4,8 +4,8 @@ import "../style/Accueilchauffeur.css";
 const HomeChauffeur = () => {
   // Données fictives de l'utilisateur (à remplacer plus tard par les données du Backend/Context)
   const [user] = useState({
-    prenom: "Mansour",
-    nom: "Fall",
+    prenom: "Abdoulaye",
+    nom: "Diouf",
     role: "Chauffeur",
   });
 
@@ -14,14 +14,14 @@ const HomeChauffeur = () => {
       {/* ── HEADER / BARRE DE NAVIGATION ── */}
       <header className="main-header">
         <div className="logo-section">
-          <span className="logo-text">Delta SA</span>
+          <img src="/src/assets/logo.png" alt="Logo" className="header-logo" />
         </div>
 
         <nav className="nav-links">
-          <a href="#declaration" className="nav-item active">
+          <a href="/Declaration" className="nav-item active">
             Déclaration
           </a>
-          <a href="#suivi" className="nav-item">
+          <a href="/SuiviChauffeur" className="nav-item">
             Suivi des dossiers
           </a>
         </nav>
@@ -69,7 +69,6 @@ const HomeChauffeur = () => {
               Consultez en temps réel l'état d'avancement de vos demandes :
               savoir si votre dossier est{" "}
               <span className="badge-info waiting">En attente</span>,
-              <span className="badge-info progress">En cours</span> ou{" "}
               <span className="badge-info validated">Validé</span>.
             </p>
             <button className="card-btn outline">Voir mes demandes</button>
