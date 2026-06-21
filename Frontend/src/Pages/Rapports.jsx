@@ -25,6 +25,14 @@ export default function Rapports() {
     return matchVehicule && matchDate;
   });
 
+  const handleNav = (item) => {
+    setActiveNav(item);
+    if (item === "Accueil") navigate("/Accueilbackoff");
+    if (item === "Historiques") navigate("/HistoBackoff");
+    if (item === "Validation") navigate("/validation");
+    if (item === "Rapports") navigate("/Rapport");
+  };
+
   const handleDownload = (rapport) => {
     const html = `
       <!DOCTYPE html>
@@ -32,26 +40,24 @@ export default function Rapports() {
       <head>
         <meta charset="UTF-8"/>
         <style>
-            @media print {
+          @media print {
             @page { margin: 0; }
             body { padding: 40px; }
-            }
-            body { font-family: 'Segoe UI', sans-serif; padding: 40px; color: #0f172a; }
-            .header { text-align: center; padding-bottom: 20px; margin-bottom: 30px; }
-            .header h1 { color: #1d4ed8; font-size: 24px; margin: 0 0 6px; }
-            .header p { color: #64748b; font-size: 14px; margin: 0; }
-            .section { margin-bottom: 20px; }
-            .label { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-            .value { font-size: 16px; font-weight: 600; color: #0f172a; padding: 10px 14px; background: #f1f5f9; border-radius: 8px; }
-            .badge { display: inline-block; background: #dcfce7; color: #16a34a; font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 13px; }
-            .footer { margin-top: 60px; border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 12px; color: #94a3b8; text-align: center; }
-            .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+          }
+          body { font-family: 'Segoe UI', sans-serif; padding: 40px; color: #0f172a; }
+          .header { text-align: center; padding-bottom: 20px; margin-bottom: 30px; }
+          .header h1 { color: #1d4ed8; font-size: 24px; margin: 0 0 6px; }
+          .section { margin-bottom: 20px; }
+          .label { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+          .value { font-size: 16px; font-weight: 600; color: #0f172a; padding: 10px 14px; background: #f1f5f9; border-radius: 8px; }
+          .badge { display: inline-block; background: #dcfce7; color: #16a34a; font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 13px; }
+          .footer { margin-top: 60px; border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 12px; color: #94a3b8; text-align: center; }
+          .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         </style>
       </head>
       <body>
         <div class="header">
           <h1>DELTA SA — Rapport d'intervention</h1>
-          
         </div>
         <div class="grid">
           <div class="section">
@@ -97,10 +103,7 @@ export default function Rapports() {
           {navItems.map((item) => (
             <button
               key={item}
-              onClick={() => {
-                setActiveNav(item);
-                if (item === "Accueil") navigate("/");
-              }}
+              onClick={() => handleNav(item)}
               style={{
                 ...styles.navLink,
                 ...(activeNav === item ? styles.navLinkActive : {}),

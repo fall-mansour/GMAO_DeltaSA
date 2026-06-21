@@ -32,8 +32,10 @@ export default function AccueilBackOffice() {
 
   const handleNav = (item) => {
     setActiveNav(item);
-    if (item === "Accueil") navigate("/");
-    if (item === "Rapports") navigate("/rapports");
+    if (item === "Accueil") navigate("/Accueilbackoff");
+    if (item === "Historiques") navigate("/HistoBackoff");
+    if (item === "Validation") navigate("/validation");
+    if (item === "Rapports") navigate("/Rapport");
   };
 
   return (
@@ -73,19 +75,23 @@ export default function AccueilBackOffice() {
           <span style={styles.actionIcon}>{actions[0].icon}</span>
           <h2 style={styles.actionTitle}>{actions[0].title}</h2>
           <p style={styles.actionDesc}>{actions[0].description}</p>
-          <button style={styles.btnFilled}>{actions[0].buttonLabel}</button>
+          <button style={styles.btnFilled} onClick={() => navigate("/validation")}>
+            {actions[0].buttonLabel}
+          </button>
         </div>
         <div style={styles.actionCard}>
           <span style={styles.actionIcon}>{actions[1].icon}</span>
           <h2 style={styles.actionTitle}>{actions[1].title}</h2>
           <p style={styles.actionDesc}>{actions[1].description}</p>
-          <button style={styles.btnOutline}>{actions[1].buttonLabel}</button>
+          <button style={styles.btnOutline} onClick={() => navigate("/HistoBackoff")}>
+            {actions[1].buttonLabel}
+          </button>
         </div>
         <div style={{ ...styles.actionCard, ...styles.cardCentered }}>
           <span style={styles.actionIcon}>{actions[2].icon}</span>
           <h2 style={styles.actionTitle}>{actions[2].title}</h2>
           <p style={styles.actionDesc}>{actions[2].description}</p>
-          <button style={styles.btnOutline} onClick={() => navigate("/rapports")}>
+          <button style={styles.btnOutline} onClick={() => navigate("/Rapport")}>
             {actions[2].buttonLabel}
           </button>
         </div>
