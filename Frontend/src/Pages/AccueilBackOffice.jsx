@@ -59,7 +59,9 @@ export default function AccueilBackOffice() {
         </div>
         <div style={styles.avatarWrapper}>
           <div style={styles.avatar}>BO</div>
-          <button style={styles.btnDeconnexion}>Déconnexion</button>
+          <button style={styles.btnDeconnexion} onClick={() => navigate("/login")}>
+            Déconnexion
+          </button>
         </div>
       </nav>
 

@@ -1,0 +1,226 @@
+/* Frontend/src/style/Accueilbackoff.css */
+
+.backoffice-page {
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-color: #eef3fb;
+  font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+
+/* ── NAVBAR ── */
+.bo-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 0 40px;
+  height: 64px;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bo-logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bo-nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.bo-nav-link {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: #64748b;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: "Segoe UI", sans-serif;
+  transition: color 0.2s ease;
+}
+
+.bo-nav-link.active {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.bo-nav-underline {
+  position: absolute;
+  bottom: -1px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background-color: #1d4ed8;
+  border-radius: 2px;
+}
+
+.bo-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bo-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #1d4ed8;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.bo-btn-deconnexion {
+  background-color: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "Segoe UI", sans-serif;
+  transition: background-color 0.2s ease;
+}
+
+.bo-btn-deconnexion:hover {
+  background-color: #1e40af;
+}
+
+/* ── HERO ── */
+.bo-hero {
+  text-align: center;
+  padding: 48px 24px 24px;
+}
+
+.bo-hero-title {
+  font-size: 38px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 10px;
+}
+
+.bo-hero-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ── GRILLE D'ACTIONS ── */
+.bo-action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 32px auto 48px;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.bo-action-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+/* Alignement de la 3ème carte au centre de la ligne suivante */
+.bo-card-centered {
+  grid-column: 1 / -1;
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.bo-action-icon {
+  font-size: 36px;
+}
+
+.bo-action-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.bo-action-desc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── BOUTONS ── */
+.bo-btn-filled {
+  margin-top: 8px;
+  padding: 13px 28px;
+  background-color: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.bo-btn-filled:hover {
+  background-color: #1e40af;
+}
+
+.bo-btn-outline {
+  margin-top: 8px;
+  padding: 13px 28px;
+  background-color: transparent;
+  color: #1d4ed8;
+  border: 2px solid #1d4ed8;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  width: 100%;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.bo-btn-outline:hover {
+  background-color: #1d4ed8;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bo-action-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+
+  .bo-card-centered {
+    max-width: 100%;
+  }
+}
