@@ -7,11 +7,16 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+/* CORRECTION : On force explicitement l'affichage du défilement vertical */
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .mh-page {
@@ -20,6 +25,8 @@ html, body, #root {
   min-height: 100vh;
   background: #eef3fb;
   color: #1a1f29;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ---------- HEADER ---------- */
@@ -31,23 +38,31 @@ html, body, #root {
   width: 100%;
   background: #ffffff;
   border-bottom: 1px solid #e2e8f3;
-  padding: 22px 56px;
+  padding: 16px 56px; /* Légèrement réduit pour un header plus élégant */
+  position: sticky; /* Reste fixé en haut lors du défilement */
+  top: 0;
+  z-index: 100;
 }
 
+.mh-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
 .brand-logo {
-  height: 95px;
+  height: 50px; /* Réduit pour éviter les déformations de ligne */
   display: block;
 }
 
 .brand-divider {
-  width: 10px;
-  height: 45px;
+  width: 1px;
+  height: 30px;
   background: #d7dbe2;
 }
 
 .brand-suffix {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: #6b7280;
   letter-spacing: 2px;
@@ -62,7 +77,7 @@ html, body, #root {
 .mh-nav-link {
   text-decoration: none;
   color: #6b7280;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   padding-bottom: 6px;
   border-bottom: 2px solid transparent;
@@ -92,7 +107,7 @@ html, body, #root {
 }
 
 .mh-user-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: #1a1f29;
 }
@@ -113,23 +128,24 @@ html, body, #root {
 
 .mh-divider-vert {
   width: 1px;
-  height: 30px;
+  height: 24px;
   background: #e2e8f3;
 }
 
+/* CORRECTION : Harmonisation esthétique du bouton de déconnexion */
 .mh-logout {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: blue;
-  border: 1px solid #e2e8f3;
+  background: #1d6fd9;
+  border: 1px solid;
   color: white;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  padding: 10px 18px;
+  padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.15s;
+  transition: all 0.2s ease;
 }
 
 .mh-logout:hover {
@@ -144,33 +160,34 @@ html, body, #root {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding: 56px 56px 100px;
+  padding: 40px 56px 80px;
+  flex: 1; /* Permet au contenu de pousser la page vers le bas */
 }
 
 .mh-heading-row {
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
 .mh-eyebrow {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #1d6fd9;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
 }
 
 .mh-title {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 800;
   margin: 0;
   color: #11151b;
 }
 
-/* ---------- SECTIONS : enveloppe commune ---------- */
+/* ---------- SECTIONS ---------- */
 
 .mh-section {
-  margin-bottom: 44px;
+  margin-bottom: 40px;
 }
 
 .mh-section-label {
@@ -181,12 +198,12 @@ html, body, #root {
 }
 
 .mh-section-label .mh-section-num {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #1d6fd9;
   color: white;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -195,20 +212,20 @@ html, body, #root {
 }
 
 .mh-section-label span.mh-section-text {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #5b6477;
 }
 
-/* ---------- BANDEAU DE SYNTHESE (tableau de bord) ---------- */
+/* ---------- TABLEAU DE BORD ---------- */
 
 .mh-stats-panel {
   background: #ffffff;
   border: 1px solid #dbe6f7;
   border-radius: 18px;
-  padding: 38px 40px;
+  padding: 32px 36px;
 }
 
 .mh-stats {
@@ -249,10 +266,10 @@ html, body, #root {
   border: none;
   color: white;
   font-weight: 700;
-  font-size: 15.5px;
+  font-size: 15px;
   cursor: pointer;
   white-space: nowrap;
-  padding: 13px 22px;
+  padding: 12px 22px;
   border-radius: 9px;
   transition: 0.15s;
 }
@@ -261,13 +278,13 @@ html, body, #root {
   background: #185fc0;
 }
 
-/* ---------- SECTION : DECLARATIONS ---------- */
+/* ---------- DECLARATIONS ---------- */
 
 .mh-primary {
   background: #ffffff;
   border: 1px solid #dbe6f7;
   border-radius: 18px;
-  padding: 38px 40px;
+  padding: 32px 36px;
 }
 
 .mh-primary-head {
@@ -278,15 +295,15 @@ html, body, #root {
 }
 
 .mh-primary-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   margin: 0 0 8px;
   color: #11151b;
 }
 
 .mh-primary-sub {
-  font-size: 18px;
-  color: black;
+  font-size: 16px;
+  color: #5b6477;
   margin: 0;
   max-width: 540px;
 }
@@ -296,7 +313,7 @@ html, body, #root {
   border: none;
   color: #1d6fd9;
   font-weight: 600;
-  font-size: 15.5px;
+  font-size: 15px;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -346,16 +363,16 @@ html, body, #root {
 .mh-queue-truck {
   font-weight: 700;
   color: #11151b;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .mh-queue-date {
-  font-size: 13.5px;
+  font-size: 13px;
   color: #8a90a0;
 }
 
 .mh-queue-desc {
-  font-size: 15px;
+  font-size: 14.5px;
   color: #3a4150;
   margin: 0;
   line-height: 1.5;
@@ -368,8 +385,8 @@ html, body, #root {
   color: #ffffff;
   border: none;
   border-radius: 9px;
-  padding: 12px 20px;
-  font-size: 14.5px;
+  padding: 11px 20px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -386,7 +403,7 @@ html, body, #root {
   border: 1px solid #c7d6ef;
 }
 
-/* ---------- FORMULAIRE INLINE D'AFFECTATION (accueil) ---------- */
+/* ---------- FORMULAIRE INLINE D'AFFECTATION ---------- */
 
 .mh-assign-form {
   margin-top: 22px;
@@ -414,7 +431,7 @@ html, body, #root {
   border: 1px solid #d7dbe2;
   border-radius: 9px;
   padding: 11px 14px;
-  font-size: 14.5px;
+  font-size: 14px;
   font-family: inherit;
   color: #11151b;
   background: #ffffff;
@@ -464,13 +481,13 @@ html, body, #root {
   background: #185fc0;
 }
 
-/* ---------- SECTION : INTERVENTIONS ---------- */
+/* ---------- INTERVENTIONS ---------- */
 
 .mh-secondary {
   background: #ffffff;
   border: 1px solid #dbe6f7;
   border-radius: 18px;
-  padding: 38px 40px;
+  padding: 32px 36px;
 }
 
 .mh-secondary-head {
@@ -481,7 +498,7 @@ html, body, #root {
 }
 
 .mh-secondary-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   margin: 0;
   color: #11151b;
@@ -497,9 +514,9 @@ html, body, #root {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 22px;
+  padding: 16px 22px;
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 15.5px;
 }
 
 .mh-list-row:nth-child(odd) {
@@ -510,7 +527,7 @@ html, body, #root {
   font-weight: 700;
   color: #11151b;
   width: 150px;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .mh-list-mecano {
@@ -519,9 +536,9 @@ html, body, #root {
 }
 
 .mh-pill {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
-  padding: 7px 16px;
+  padding: 6px 14px;
   border-radius: 20px;
   white-space: nowrap;
 }

@@ -25,6 +25,11 @@ import HomeMecano from "./Pages/Accueilmecano";
 import AffectationsMecano from "./Pages/AffectationMecano";
 import AccueilBackOffice from "./Pages/AccueilBackOffice";
 import Rapports from "./Pages/Rapports";
+import MaintenanceHome from "./Pages/MaintenanceHome";
+import InterventionsPage from "./Pages/InterventionsPage";
+import DeclarationsPage from "./Pages/DeclarationsPage";
+import DashboardPage from "./Pages/DashboardPage";
+import AdminHome from "./Pages/AdminHome";
 
 function HomeWrapper() {
   const navigate = useNavigate();

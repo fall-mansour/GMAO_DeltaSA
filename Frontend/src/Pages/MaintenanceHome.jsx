@@ -1,27 +1,7 @@
-import React, { useState } from "react";
-import "../style/MaintenanceHome.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import logo from "../assets/logo.png";
-
-/**
- * Page d'accueil - Responsable de maintenance
- * Application GMAO - Delta SA
- *
- * Coherente avec les 3 pages detaillees :
- * - Le bandeau KPI reprend les 5 indicateurs du Dashboard complet
- *   (camions, mecaniciens, disponibilite, taux de panne, cout du mois).
- * - La section Declarations permet d'affecter un mecanicien directement
- *   ici via un formulaire inline (meme logique que DeclarationsPage).
- * - La section Interventions reprend le meme format de ligne que
- *   InterventionsPage.
- *
- * Donnees d'exemple affichees tant que le backend n'est pas branche.
- * Brancher en passant les props declarations / interventions / stats /
- * mecaniciens, et en gerant onConfirmAssign pour l'affectation.
- *
- * LOGO : remplacer le bloc <div className="brand-mark"> par
- *   <img src="/logo-delta-sa.png" alt="Delta SA" className="brand-logo" />
- * une fois le fichier logo ajoute au dossier public/ du projet.
- */
+import "../style/MaintenanceHome.css";
 
 const EXEMPLE_DECLARATIONS = [
   {
@@ -75,8 +55,6 @@ const EXEMPLE_MECANICIENS = [
   { id: 4, nom: "Awa Kane" },
 ];
 
-// Memes valeurs d'exemple que DashboardPage, pour rester coherent
-// quand le backend n'est pas encore branche.
 const EXEMPLE_STATS = {
   nbCamions: 24,
   nbMecaniciens: 12,
@@ -96,12 +74,36 @@ export default function MaintenanceHome({
   interventions = null,
   stats = null,
   mecaniciens = null,
-  onOpenDeclarations = () => {},
-  onOpenInterventions = () => {},
-  onOpenDashboard = () => {},
-  onConfirmAssign = () => {},
-  onLogout = () => {},
+  onConfirmAssign = () => {}, // On garde cette prop pour traiter la soumission du formulaire
 }) {
+  // 2. Déclaration de la constante navigate
+  const navigate = useNavigate();
+
+  const [openId, setOpenId] = useState(null);
+  const [formState, setFormState] = useState({});
+
+  // 3. Centralisation des fonctions de redirection (Modifie les chemins ici)
+  const handleOpenDashboard = () => {
+    navigate("/Dashboard"); // <-- Ton chemin pour le Dashboard complet
+  };
+
+  const handleOpenDeclarations = () => {
+    navigate("/Declarations"); // <-- Ton chemin pour voir toutes les déclarations
+  };
+
+  const handleOpenInterventions = () => {
+    navigate("/Interventions"); // <-- Ton chemin pour voir toutes les interventions
+  };
+
+  const handleLogout = () => {
+    // Nettoyage de la session utilisateur si nécessaire
+    localStorage.removeItem("token");
+    sessionStorage.clear();
+
+    navigate("/login"); // <-- Ton chemin pour la page de connexion
+  };
+
+  // --- Logique d'affichage et de filtrage d'origine ---
   const displayDeclarations =
     declarations && declarations.length > 0
       ? declarations.slice(0, 3)
@@ -116,11 +118,8 @@ export default function MaintenanceHome({
   const s = stats || EXEMPLE_STATS;
 
   const tauxDisponibilite = Math.round(
-    (s.disponibles / (s.disponibles + s.immobilises)) * 100
+    (s.disponibles / (s.disponibles + s.immobilises)) * 100,
   );
-
-  const [openId, setOpenId] = useState(null);
-  const [formState, setFormState] = useState({});
 
   const toggleOpen = (id) => {
     setOpenId(openId === id ? null : id);
@@ -146,9 +145,9 @@ export default function MaintenanceHome({
   return (
     <div className="mh-page">
       <header className="mh-topbar">
-       <div className="mh-brand">
-            <img src={logo} alt="Delta SA" className="brand-logo" />
-           <span className="brand-divider" />
+        <div className="mh-brand">
+          <img src={logo} alt="Delta SA" className="brand-logo" />
+          <span className="brand-divider" />
           <span className="brand-suffix">GMAO</span>
         </div>
 
@@ -166,11 +165,11 @@ export default function MaintenanceHome({
 
         <div className="mh-user">
           <div className="mh-user-info">
-           
             <div className="mh-avatar">{userInitials}</div>
           </div>
           <div className="mh-divider-vert" />
-          <button className="mh-logout" onClick={onLogout}>
+          {/* Câblage direct de la déconnexion interne */}
+          <button className="mh-logout" onClick={handleLogout}>
             Déconnexion
           </button>
         </div>
@@ -205,9 +204,7 @@ export default function MaintenanceHome({
               </div>
               <div className="mh-stat">
                 <span className="mh-stat-label">Taux de panne</span>
-                <span className="mh-stat-value">
-                  {s.tauxPanneMoisEnCours}%
-                </span>
+                <span className="mh-stat-value">{s.tauxPanneMoisEnCours}%</span>
               </div>
               <div className="mh-stat">
                 <span className="mh-stat-label">Coût du mois</span>
@@ -218,7 +215,8 @@ export default function MaintenanceHome({
             </div>
 
             <div className="mh-stats-footer">
-              <button className="mh-stats-link" onClick={onOpenDashboard}>
+              {/* Câblage de la redirection du Dashboard */}
+              <button className="mh-stats-link" onClick={handleOpenDashboard}>
                 Tableau de bord complet
               </button>
             </div>
@@ -235,13 +233,13 @@ export default function MaintenanceHome({
           <div className="mh-primary">
             <div className="mh-primary-head">
               <div>
-                
                 <h2 className="mh-primary-sub">
                   Validées par le back-office, en attente d'affectation à un
                   mécanicien.
                 </h2>
               </div>
-              <button className="mh-btn-text" onClick={onOpenDeclarations}>
+              {/* Câblage de la redirection pour les Déclarations */}
+              <button className="mh-btn-text" onClick={handleOpenDeclarations}>
                 Tout afficher
               </button>
             </div>
@@ -260,9 +258,7 @@ export default function MaintenanceHome({
                       <div className="mh-decl-head">
                         <div className="mh-decl-main">
                           <div className="mh-decl-top">
-                            <span className="mh-queue-truck">
-                              {d.camion}
-                            </span>
+                            <span className="mh-queue-truck">{d.camion}</span>
                             <span className="mh-queue-date">{d.date}</span>
                           </div>
                           <p className="mh-queue-desc">{d.description}</p>
@@ -291,7 +287,7 @@ export default function MaintenanceHome({
                                 updateField(
                                   d.id,
                                   "idMecanicien",
-                                  e.target.value
+                                  e.target.value,
                                 )
                               }
                             >
@@ -317,11 +313,7 @@ export default function MaintenanceHome({
                               placeholder="Ex : 75000"
                               value={values.coutEstime || ""}
                               onChange={(e) =>
-                                updateField(
-                                  d.id,
-                                  "coutEstime",
-                                  e.target.value
-                                )
+                                updateField(d.id, "coutEstime", e.target.value)
                               }
                             />
                           </div>
@@ -349,8 +341,7 @@ export default function MaintenanceHome({
             ) : (
               <div className="mh-empty">
                 <p className="mh-empty-text">
-                  Aucune déclaration en attente d'affectation pour le
-                  moment.
+                  Aucune déclaration en attente d'affectation pour le moment.
                 </p>
               </div>
             )}
@@ -367,7 +358,8 @@ export default function MaintenanceHome({
           <div className="mh-secondary">
             <div className="mh-secondary-head">
               <h2 className="mh-secondary-title">Interventions en cours</h2>
-              <button className="mh-btn-text" onClick={onOpenInterventions}>
+              {/* Câblage de la redirection pour les Interventions */}
+              <button className="mh-btn-text" onClick={handleOpenInterventions}>
                 Voir le suivi
               </button>
             </div>

@@ -167,7 +167,7 @@ const SuiviReparation = () => {
 
       {/* Lien de retour vers l'accueil mécanicien */}
       <div className="back-link-wrapper">
-        <Link to="/mecano" className="back-link">
+        <Link to="/Accueilmeca" className="back-link">
           ← Retour à l'accueil atelier
         </Link>
       </div>

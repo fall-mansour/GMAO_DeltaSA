@@ -1,4 +1,3 @@
-import React from "react";
 import logo from "../assets/logo.png";
 import {
   Chart as ChartJS,
@@ -18,7 +17,7 @@ ChartJS.register(
   BarElement,
   ArcElement,
   Tooltip,
-  Legend
+  Legend,
 );
 
 /**
@@ -36,8 +35,18 @@ ChartJS.register(
  */
 
 const MOIS_12 = [
-  "Jan", "Fev", "Mar", "Avr", "Mai", "Juin",
-  "Juil", "Aout", "Sept", "Oct", "Nov", "Dec",
+  "Jan",
+  "Fev",
+  "Mar",
+  "Avr",
+  "Mai",
+  "Juin",
+  "Juil",
+  "Aout",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
 
 const EXEMPLE_DATA = {
@@ -54,8 +63,8 @@ const EXEMPLE_DATA = {
   coutParMois: {
     labels: MOIS_12,
     valeurs: [
-      820000, 950000, 610000, 1100000, 875000, 1240000,
-      990000, 730000, 860000, 1320000, 905000, 1180000,
+      820000, 950000, 610000, 1100000, 875000, 1240000, 990000, 730000, 860000,
+      1320000, 905000, 1180000,
     ],
   },
   disponibilite: {
@@ -127,7 +136,7 @@ export default function DashboardPage({ data = null, onBack = () => {} }) {
   const tauxDisponibilite = Math.round(
     (d.disponibilite.disponibles /
       (d.disponibilite.disponibles + d.disponibilite.immobilises)) *
-      100
+      100,
   );
 
   const barOptions = {
@@ -179,8 +188,8 @@ export default function DashboardPage({ data = null, onBack = () => {} }) {
     <div className="db-page">
       <header className="db-topbar">
         <div className="mh-brand">
-            <img src={logo} alt="Delta SA" className="brand-logo" />
-         <span className="brand-divider" />
+          <img src={logo} alt="Delta SA" className="brand-logo" />
+          <span className="brand-divider" />
           <span className="db-brand-suffix">GMAO</span>
         </div>
 
@@ -220,9 +229,11 @@ export default function DashboardPage({ data = null, onBack = () => {} }) {
           <div className="db-count-card">
             <span className="db-count-label">Taux de panne actuel</span>
             <span className="db-count-value">
-              {d.tauxPanneParMois.valeurs[
-                d.tauxPanneParMois.valeurs.length - 1
-              ]}
+              {
+                d.tauxPanneParMois.valeurs[
+                  d.tauxPanneParMois.valeurs.length - 1
+                ]
+              }
               %
             </span>
             <span className="db-count-sub">Mois en cours</span>
@@ -269,8 +280,8 @@ export default function DashboardPage({ data = null, onBack = () => {} }) {
                 Temps moyen de réparation (MTTR)
               </h2>
               <p className="db-chart-sub">
-                Durée moyenne, en heures, entre l'affectation d'un mécanicien
-                et la résolution de la panne
+                Durée moyenne, en heures, entre l'affectation d'un mécanicien et
+                la résolution de la panne
               </p>
             </div>
             <div className="db-chart-body">
