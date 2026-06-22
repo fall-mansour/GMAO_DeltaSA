@@ -22,7 +22,7 @@ const EXEMPLE_DECLARATIONS = [
     camion: "CAM-330",
     date: "15/06/2026",
     description: "Bruit suspect au niveau du moteur lors de l'accélération.",
-  },
+  },  // ← virgule ajoutée
   {
     id: 4,
     camion: "CAM-048",

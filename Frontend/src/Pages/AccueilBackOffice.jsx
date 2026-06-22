@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const actions = [
   {
-    icon: "✅",
-    title: "Valider les déclarations",
-    description: "Consultez les demandes soumises par les chauffeurs et validez les interventions.",
-    buttonLabel: "VOIR LES DEMANDES",
+    icon: "🚨",
+    title: "Déclarer une panne",
+    description: "Déclarez une panne au nom d'un chauffeur.",
+    buttonLabel: "FAIRE UNE DÉCLARATION",
     filled: true,
   },
   {
@@ -28,16 +28,15 @@ const actions = [
 export default function AccueilBackOffice() {
   const [activeNav, setActiveNav] = useState("Accueil");
   const navigate = useNavigate();
-  const navItems = ["Accueil", "Historiques", "Validation", "Rapports"];
+  const navItems = ["Accueil", "Déclaration", "Historiques", "Rapports"];
 
   const handleNav = (item) => {
     setActiveNav(item);
     if (item === "Accueil") navigate("/Accueilbackoff");
     if (item === "Historiques") navigate("/HistoBackoff");
-    if (item === "Validation") navigate("/validation");
     if (item === "Rapports") navigate("/Rapport");
-  };
-
+    if (item === "Déclaration") navigate("/declaration-backoffice");
+    };
   return (
     <div style={styles.page}>
       <nav style={styles.navbar}>
@@ -77,7 +76,7 @@ export default function AccueilBackOffice() {
           <span style={styles.actionIcon}>{actions[0].icon}</span>
           <h2 style={styles.actionTitle}>{actions[0].title}</h2>
           <p style={styles.actionDesc}>{actions[0].description}</p>
-          <button style={styles.btnFilled} onClick={() => navigate("/validation")}>
+          <button style={styles.btnFilled} onClick={() => navigate("/declaration-backoffice")}>
             {actions[0].buttonLabel}
           </button>
         </div>

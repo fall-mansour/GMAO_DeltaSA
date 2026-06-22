@@ -1,5 +1,6 @@
 import "./App.css";
 import HomeChauffeur from "./Pages/Accueilchauffeur";
+import DeclarationBackOffice from "./Pages/DeclarationBackOffice";
 import ValidationListe from "./Pages/validation";
 import HistoriqueBackoffice from "./Pages/HistoriqueBackoff";
 import SuiviChauffeur from "./Pages/Suivichauffeur";
@@ -35,7 +36,7 @@ function App() {
         <Route path="/HistoBackoff" element={<HistoriqueBackoffice />} />
         <Route path="/Accueilbackoff" element={<AccueilBackOffice />} />
         <Route path="/Rapport" element={<Rapports />} />
-
+        <Route path="/declaration-backoffice" element={<DeclarationBackOffice />} />
         <Route path="/login" element={<Login />} />
 
         <Route path="/Accueilmeca" element={<HomeMecano />} />
@@ -44,8 +45,9 @@ function App() {
 
         <Route path="/Homemaintenance" element={<MaintenanceHome />} />
         <Route path="/Interventions" element={<InterventionsPage />} />
-        <Route path="/Declarations" element={<DeclarationsPage />} />
-        <Route path="/Dashboard" element={<DashboardPage />} />
+        <Route path="/Declarations" element={<DeclarationsPage onBack={() => window.location.href = '/Homemaintenance'} />} />
+        <Route path="/Dashboard" element={<DashboardPage onBack={() => window.location.href = '/Homemaintenance'} />} />
+
       </Routes>
     </Router>
   );

@@ -1,17 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../style/Accueilchauffeur.css";
 
 const HomeChauffeur = () => {
-  // Données fictives de l'utilisateur (à remplacer plus tard par les données du Backend/Context)
   const [user] = useState({
     prenom: "Abdoulaye",
     nom: "Diouf",
     role: "Chauffeur",
   });
 
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-chauffeur">
-      {/* ── HEADER / BARRE DE NAVIGATION ── */}
       <header className="main-header">
         <div className="logo-section">
           <img src="/src/assets/logo.png" alt="Logo" className="header-logo" />
@@ -37,7 +38,6 @@ const HomeChauffeur = () => {
         </div>
       </header>
 
-      {/* ── CORPS DE LA PAGE (BODY) ── */}
       <main className="dashboard-body">
         <div className="welcome-section">
           <h1>Bonjour, {user.prenom} !</h1>
@@ -47,9 +47,7 @@ const HomeChauffeur = () => {
           </p>
         </div>
 
-        {/* Grille des cartes d'information et d'action */}
         <div className="actions-grid">
-          {/* Carte 1 : Déclarer une panne */}
           <div className="action-card primary">
             <div className="card-icon">⚠️</div>
             <h2>Déclarer une panne</h2>
@@ -58,10 +56,11 @@ const HomeChauffeur = () => {
               <strong> Déclarez votre panne ici</strong> pour informer
               instantanément l'équipe de maintenance.
             </p>
-            <button className="card-btn">Accéder au formulaire</button>
+            <button className="card-btn" onClick={() => navigate("/Declaration")}>
+              Accéder au formulaire
+            </button>
           </div>
 
-          {/* Carte 2 : Suivi du dossier */}
           <div className="action-card secondary">
             <div className="card-icon">📋</div>
             <h2>Suivi de vos dossiers</h2>
@@ -71,7 +70,9 @@ const HomeChauffeur = () => {
               <span className="badge-info waiting">En attente</span>,
               <span className="badge-info validated">Validé</span>.
             </p>
-            <button className="card-btn outline">Voir mes demandes</button>
+            <button className="card-btn outline" onClick={() => navigate("/SuiviChauffeur")}>
+              Voir mes demandes
+            </button>
           </div>
         </div>
       </main>
