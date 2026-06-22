@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+// Frontend/src/pages/MaintenanceHome.jsx
+import { useRef } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "../style/MaintenanceHome.css";
 
@@ -74,56 +76,55 @@ export default function MaintenanceHome({
   interventions = null,
   stats = null,
   mecaniciens = null,
-  onConfirmAssign = () => {}, // On garde cette prop pour traiter la soumission du formulaire
+  onConfirmAssign = () => {},
 }) {
-  // 2. Déclaration de la constante navigate
   const navigate = useNavigate();
 
+  // 1. Création des références pour cibler les sections de la page
+  const dashboardRef = useRef(null);
+  const declarationsRef = useRef(null);
+  const interventionsRef = useRef(null);
+
+  // État pour savoir quel onglet est actif visuellement
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [openId, setOpenId] = useState(null);
   const [formState, setFormState] = useState({});
 
-  // 3. Centralisation des fonctions de redirection (Modifie les chemins ici)
-  const handleOpenDashboard = () => {
-    navigate("/Dashboard"); // <-- Ton chemin pour le Dashboard complet
+  // 2. Fonction de défilement fluide (Smooth Scroll)
+  const scrollToSection = (ref, tabName) => {
+    setActiveTab(tabName);
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
-  const handleOpenDeclarations = () => {
-    navigate("/Declarations"); // <-- Ton chemin pour voir toutes les déclarations
-  };
-
-  const handleOpenInterventions = () => {
-    navigate("/Interventions"); // <-- Ton chemin pour voir toutes les interventions
-  };
+  // Redirections vers d'autres pages de l'application
+  const handleOpenDashboard = () => navigate("/Dashboard");
+  const handleOpenDeclarations = () => navigate("/Declarations");
+  const handleOpenInterventions = () => navigate("/Interventions");
 
   const handleLogout = () => {
-    // Nettoyage de la session utilisateur si nécessaire
     localStorage.removeItem("token");
     sessionStorage.clear();
-
-    navigate("/login"); // <-- Ton chemin pour la page de connexion
+    navigate("/login");
   };
 
-  // --- Logique d'affichage et de filtrage d'origine ---
+  // Logique de filtrage interne
   const displayDeclarations =
     declarations && declarations.length > 0
       ? declarations.slice(0, 3)
       : EXEMPLE_DECLARATIONS;
-
   const displayInterventions =
     interventions && interventions.length > 0
       ? interventions.slice(0, 3)
       : EXEMPLE_INTERVENTIONS;
-
   const displayMecaniciens = mecaniciens || EXEMPLE_MECANICIENS;
   const s = stats || EXEMPLE_STATS;
-
   const tauxDisponibilite = Math.round(
     (s.disponibles / (s.disponibles + s.immobilises)) * 100,
   );
 
-  const toggleOpen = (id) => {
-    setOpenId(openId === id ? null : id);
-  };
+  const toggleOpen = (id) => setOpenId(openId === id ? null : id);
 
   const updateField = (id, field, value) => {
     setFormState((prev) => ({
@@ -143,24 +144,59 @@ export default function MaintenanceHome({
   };
 
   return (
-    <div className="mh-page">
+    <div className="mh-page" style={{ overflowY: "auto" }}>
+      {" "}
+      {/* Sécurité pour forcer le scroll vertical */}
+      {/* ── HEADER / TOPBAR ── */}
       <header className="mh-topbar">
-        <div className="mh-brand">
+        <div
+          className="mh-brand"
+          onClick={() => scrollToSection(dashboardRef, "dashboard")}
+          style={{ cursor: "pointer" }}
+        >
           <img src={logo} alt="Delta SA" className="brand-logo" />
           <span className="brand-divider" />
           <span className="brand-suffix">GMAO</span>
         </div>
 
+        {/* Remplacement des balises <a> par des boutons typés pour contrôler le scroll */}
         <nav className="mh-nav">
-          <a className="mh-nav-link is-active" href="#tableau-de-bord">
-            tableau de bord
-          </a>
-          <a className="mh-nav-link" href="#declarations">
-            declarations
-          </a>
-          <a className="mh-nav-link" href="#interventions">
-            interventions
-          </a>
+          <button
+            className={`mh-nav-link ${activeTab === "dashboard" ? "is-active" : ""}`}
+            onClick={() => scrollToSection(dashboardRef, "dashboard")}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              textTransform: "uppercase",
+            }}
+          >
+            Tableau de bord
+          </button>
+          <button
+            className={`mh-nav-link ${activeTab === "declarations" ? "is-active" : ""}`}
+            onClick={() => scrollToSection(declarationsRef, "declarations")}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              textTransform: "uppercase",
+            }}
+          >
+            Déclarations
+          </button>
+          <button
+            className={`mh-nav-link ${activeTab === "interventions" ? "is-active" : ""}`}
+            onClick={() => scrollToSection(interventionsRef, "interventions")}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              textTransform: "uppercase",
+            }}
+          >
+            Interventions
+          </button>
         </nav>
 
         <div className="mh-user">
@@ -168,13 +204,12 @@ export default function MaintenanceHome({
             <div className="mh-avatar">{userInitials}</div>
           </div>
           <div className="mh-divider-vert" />
-          {/* Câblage direct de la déconnexion interne */}
           <button className="mh-logout" onClick={handleLogout}>
             Déconnexion
           </button>
         </div>
       </header>
-
+      {/* ── CORPS DE PAGE ── */}
       <main className="mh-content">
         <div className="mh-heading-row">
           <p className="mh-eyebrow">Espace responsable de maintenance</p>
@@ -182,7 +217,11 @@ export default function MaintenanceHome({
         </div>
 
         {/* ---------- SECTION 1 : TABLEAU DE BORD ---------- */}
-        <section className="mh-section" id="tableau-de-bord">
+        <section
+          className="mh-section"
+          ref={dashboardRef}
+          style={{ scrollMarginTop: "100px" }}
+        >
           <div className="mh-section-label">
             <span className="mh-section-num">1</span>
             <span className="mh-section-text">Tableau de bord</span>
@@ -213,9 +252,7 @@ export default function MaintenanceHome({
                 </span>
               </div>
             </div>
-
             <div className="mh-stats-footer">
-              {/* Câblage de la redirection du Dashboard */}
               <button className="mh-stats-link" onClick={handleOpenDashboard}>
                 Tableau de bord complet
               </button>
@@ -224,7 +261,11 @@ export default function MaintenanceHome({
         </section>
 
         {/* ---------- SECTION 2 : DECLARATIONS ---------- */}
-        <section className="mh-section" id="declarations">
+        <section
+          className="mh-section"
+          ref={declarationsRef}
+          style={{ scrollMarginTop: "100px" }}
+        >
           <div className="mh-section-label">
             <span className="mh-section-num">2</span>
             <span className="mh-section-text">Déclarations à traiter</span>
@@ -238,7 +279,6 @@ export default function MaintenanceHome({
                   mécanicien.
                 </h2>
               </div>
-              {/* Câblage de la redirection pour les Déclarations */}
               <button className="mh-btn-text" onClick={handleOpenDeclarations}>
                 Tout afficher
               </button>
@@ -249,7 +289,6 @@ export default function MaintenanceHome({
                 {displayDeclarations.map((d) => {
                   const isOpen = openId === d.id;
                   const values = formState[d.id] || {};
-
                   return (
                     <div
                       className={`mh-decl-card${isOpen ? " is-open" : ""}`}
@@ -263,11 +302,8 @@ export default function MaintenanceHome({
                           </div>
                           <p className="mh-queue-desc">{d.description}</p>
                         </div>
-
                         <button
-                          className={`mh-btn-assign${
-                            isOpen ? " is-active" : ""
-                          }`}
+                          className={`mh-btn-assign${isOpen ? " is-active" : ""}`}
                           onClick={() => toggleOpen(d.id)}
                         >
                           {isOpen ? "Fermer" : "Affecter un mécanicien"}
@@ -301,7 +337,6 @@ export default function MaintenanceHome({
                               ))}
                             </select>
                           </div>
-
                           <div className="mh-field">
                             <label htmlFor={`cout-${d.id}`}>
                               Coût estimé (FCFA)
@@ -317,7 +352,6 @@ export default function MaintenanceHome({
                               }
                             />
                           </div>
-
                           <div className="mh-assign-footer">
                             <button
                               className="mh-btn-cancel"
@@ -341,7 +375,7 @@ export default function MaintenanceHome({
             ) : (
               <div className="mh-empty">
                 <p className="mh-empty-text">
-                  Aucune déclaration en attente d'affectation pour le moment.
+                  Aucune déclaration en attente d'affectation.
                 </p>
               </div>
             )}
@@ -349,7 +383,11 @@ export default function MaintenanceHome({
         </section>
 
         {/* ---------- SECTION 3 : INTERVENTIONS ---------- */}
-        <section className="mh-section" id="interventions">
+        <section
+          className="mh-section"
+          ref={interventionsRef}
+          style={{ scrollMarginTop: "100px" }}
+        >
           <div className="mh-section-label">
             <span className="mh-section-num">3</span>
             <span className="mh-section-text">Interventions en cours</span>
@@ -358,7 +396,6 @@ export default function MaintenanceHome({
           <div className="mh-secondary">
             <div className="mh-secondary-head">
               <h2 className="mh-secondary-title">Interventions en cours</h2>
-              {/* Câblage de la redirection pour les Interventions */}
               <button className="mh-btn-text" onClick={handleOpenInterventions}>
                 Voir le suivi
               </button>
@@ -378,9 +415,7 @@ export default function MaintenanceHome({
               </ul>
             ) : (
               <div className="mh-empty mh-empty-compact">
-                <p className="mh-empty-text">
-                  Aucune intervention en cours pour le moment.
-                </p>
+                <p className="mh-empty-text">Aucune intervention en cours.</p>
               </div>
             )}
           </div>

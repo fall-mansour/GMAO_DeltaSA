@@ -1,0 +1,497 @@
+/* ============================================================
+   Admin.css - Espace Administrateur - GMAO Delta SA
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0; padding: 0;
+  width: 100%; min-height: 100vh;
+}
+
+.admin-page {
+  font-family: "Segoe UI", Arial, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background: #eef3fb;
+  color: #1a1f29;
+}
+
+/* ---------- HEADER ---------- */
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f3;
+  padding: 22px 56px;
+}
+.mh-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand-logo {
+  height: 89px;
+  display: block;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 26px;
+  background: #d7dbe2;
+}
+
+
+.admin-brand-suffix {
+  font-size: 15px; font-weight: 700;
+  color: #6b7280; letter-spacing: 2px; text-transform: uppercase;
+}
+
+.admin-nav {
+  display: flex; gap: 40px;
+}
+
+.admin-nav-link {
+  text-decoration: none;
+  color: #6b7280;
+  font-size: 16px; font-weight: 500;
+  padding-bottom: 6px;
+  border-bottom: 2px solid transparent;
+  transition: 0.15s;
+}
+
+.admin-nav-link:hover { color: #1a1f29; }
+
+.admin-nav-link.is-active {
+  color: #1d6fd9; font-weight: 600;
+  border-bottom-color: #1d6fd9;
+}
+
+.admin-user {
+  display: flex; align-items: center; gap: 16px;
+}
+
+.admin-user-info {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.admin-user-name {
+  font-size: 16px; font-weight: 600; color: #1a1f29;
+}
+
+.admin-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: #e6edfb; color: #1d6fd9;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 15px; flex-shrink: 0;
+}
+
+.admin-divider-vert {
+  width: 1px; height: 30px; background: #e2e8f3;
+}
+
+.admin-logout {
+  background: none;
+  border: 1px solid #e2e8f3;
+  color: #6b7280;
+  font-size: 15px; font-weight: 600;
+  padding: 10px 18px; border-radius: 8px;
+  cursor: pointer; transition: 0.15s;
+}
+
+.admin-logout:hover {
+  background: #fbebeb; border-color: #f0c9c9; color: #b3372f;
+}
+
+.admin-back {
+  background: none;
+  border: 1px solid #e2e8f3;
+  color: #1d6fd9;
+  font-size: 15px; font-weight: 600;
+  padding: 10px 18px; border-radius: 8px;
+  cursor: pointer; transition: 0.15s;
+}
+
+.admin-back:hover { background: #f3f8fe; }
+
+/* ---------- CONTENU ---------- */
+
+.admin-content {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 56px 56px 100px;
+}
+
+.admin-eyebrow {
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: #1d6fd9; margin: 0 0 10px;
+}
+
+.admin-title {
+  font-size: 38px; font-weight: 800;
+  margin: 0 0 40px; color: #11151b;
+}
+
+/* ---------- PAGE ACCUEIL ADMIN : cartes modules ---------- */
+
+.admin-modules {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 900px;
+}
+
+.admin-module-card {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 18px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-module-card:hover {
+  border-color: #1d6fd9;
+  box-shadow: 0 8px 24px rgba(29, 111, 217, 0.1);
+  transform: translateY(-2px);
+}
+
+.admin-module-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: #e6edfb;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+
+.admin-module-title {
+  font-size: 20px; font-weight: 700; color: #11151b; margin: 0;
+}
+
+.admin-module-sub {
+  font-size: 14.5px; color: #6b7280; margin: 0; line-height: 1.5;
+}
+
+.admin-module-btn {
+  margin-top: 10px;
+  background: #1d6fd9; color: white;
+  border: none; border-radius: 9px;
+  padding: 13px 0; font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: 0.15s;
+}
+
+.admin-module-btn:hover { background: #185fc0; }
+
+/* ---------- STATS ACCUEIL ---------- */
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 44px;
+}
+
+.admin-stat-card {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.admin-stat-label {
+  font-size: 13px; font-weight: 600; color: #5b6477;
+}
+
+.admin-stat-value {
+  font-size: 32px; font-weight: 800; color: #11151b;
+}
+
+.admin-stat-sub {
+  font-size: 12.5px; color: #8a90a0;
+}
+
+/* ---------- TABLEAU ---------- */
+
+.admin-table-panel {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 16px;
+  padding: 30px 32px;
+}
+
+.admin-table-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.admin-table-title {
+  font-size: 20px; font-weight: 700; color: #11151b; margin: 0;
+}
+
+.admin-table-actions {
+  display: flex; gap: 12px; align-items: center;
+}
+
+.admin-search {
+  border: 1px solid #d7dbe2;
+  border-radius: 9px;
+  padding: 10px 16px;
+  font-size: 14.5px;
+  font-family: inherit;
+  color: #11151b;
+  background: #f9fbfe;
+  width: 240px;
+}
+
+.admin-search:focus {
+  outline: none; border-color: #1d6fd9; background: #ffffff;
+}
+
+.admin-btn-add {
+  background: #1d6fd9; color: white;
+  border: none; border-radius: 9px;
+  padding: 11px 20px;
+  font-size: 14.5px; font-weight: 700;
+  cursor: pointer; white-space: nowrap; transition: 0.15s;
+}
+
+.admin-btn-add:hover { background: #185fc0; }
+
+/* TABLE */
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: #8a90a0;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.admin-table td {
+  padding: 16px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #1a1f29;
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td { border-bottom: none; }
+
+.admin-table tr:hover td { background: #fafbfe; }
+
+.admin-table-name { font-weight: 700; color: #11151b; }
+
+/* BADGES ROLE */
+
+.admin-role-badge {
+  font-size: 12px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px;
+  white-space: nowrap;
+}
+
+.admin-role-admin         { background: #fde8e8; color: #b3372f; }
+.admin-role-chauffeur     { background: #d9e8fb; color: #1d6fd9; }
+.admin-role-mecanicien    { background: #d7f3df; color: #1d8a4a; }
+.admin-role-backoffice    { background: #fdeebd; color: #8a6300; }
+.admin-role-responsable   { background: #ede9fe; color: #6d28d9; }
+
+/* BADGE ETAT CAMION */
+
+.admin-etat-badge {
+  font-size: 12px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px;
+}
+
+.admin-etat-dispo    { background: #d7f3df; color: #1d8a4a; }
+.admin-etat-panne    { background: #fde8e8; color: #b3372f; }
+.admin-etat-entretien { background: #fdeebd; color: #8a6300; }
+
+/* ACTIONS TABLEAU */
+
+.admin-btn-edit {
+  background: #f0f4fb; color: #1d6fd9;
+  border: 1px solid #c7d6ef;
+  border-radius: 7px;
+  padding: 7px 14px; font-size: 13px; font-weight: 600;
+  cursor: pointer; margin-right: 8px; transition: 0.15s;
+}
+
+.admin-btn-edit:hover { background: #dbeafe; }
+
+.admin-btn-delete {
+  background: #fef2f2; color: #b3372f;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  padding: 7px 14px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: 0.15s;
+}
+
+.admin-btn-delete:hover { background: #fde8e8; }
+
+/* ---------- MODAL ---------- */
+
+.admin-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+}
+
+.admin-modal {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 36px 40px;
+  width: 100%; max-width: 520px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.admin-modal-title {
+  font-size: 22px; font-weight: 700;
+  margin: 0 0 28px; color: #11151b;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.admin-form-grid.full { grid-template-columns: 1fr; }
+
+.admin-field {
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.admin-field label {
+  font-size: 13px; font-weight: 700; color: #5b6477;
+}
+
+.admin-field input,
+.admin-field select {
+  border: 1px solid #d7dbe2;
+  border-radius: 9px;
+  padding: 11px 14px;
+  font-size: 14.5px;
+  font-family: inherit;
+  color: #11151b;
+  background: #f9fbfe;
+}
+
+.admin-field input:focus,
+.admin-field select:focus {
+  outline: none; border-color: #1d6fd9; background: #ffffff;
+}
+
+.admin-field.span2 { grid-column: 1 / -1; }
+
+.admin-modal-footer {
+  display: flex; justify-content: flex-end; gap: 12px;
+}
+
+.admin-btn-cancel {
+  background: none; border: 1px solid #d7dbe2;
+  color: #6b7280; font-size: 14px; font-weight: 600;
+  padding: 11px 20px; border-radius: 9px; cursor: pointer;
+}
+
+.admin-btn-save {
+  background: #1d6fd9; color: white;
+  border: none; font-size: 14px; font-weight: 700;
+  padding: 11px 22px; border-radius: 9px; cursor: pointer;
+}
+
+.admin-btn-save:hover { background: #185fc0; }
+
+/* ---------- CAMIONS : chauffeurs rattachés ---------- */
+
+.admin-chauffeurs-tags {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+
+.admin-chauffeur-tag {
+  background: #e6edfb; color: #1d6fd9;
+  font-size: 12px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1000px) {
+  .admin-stats { grid-template-columns: repeat(2, 1fr); }
+  .admin-modules { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .admin-content { padding: 32px 20px; }
+  .admin-nav { display: none; }
+  .admin-form-grid { grid-template-columns: 1fr; }
+  .admin-table-head { flex-direction: column; align-items: flex-start; }
+  .admin-search { width: 100%; }
+}
+
+/* ---------- LARGEURS COLONNES TABLEAU ---------- */
+
+.admin-table { table-layout: fixed; }
+
+.admin-table th:nth-child(1) { width: 20%; }
+.admin-table th:nth-child(2) { width: 13%; }
+.admin-table th:nth-child(3) { width: 25%; }
+.admin-table th:nth-child(4) { width: 22%; }
+.admin-table th:nth-child(5) { width: 20%; }
+
+/* ---------- FILTRES RÔLE ---------- */
+
+.admin-role-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 32px 20px;
+}
+
+.admin-role-filter-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1.5px solid #d7dbe2;
+  background: #f9fbfe;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s;
+  font-family: inherit;
+}
+
+.admin-role-filter-btn:hover {
+  border-color: #1d6fd9;
+  color: #1d6fd9;
+}
+
+.admin-role-filter-btn.is-active {
+  background: #1d6fd9;
+  border-color: #1d6fd9;
+  color: #fff;
+}
+
+/* ---------- CHAMPS PLEINE LARGEUR MODAL ---------- */
+
+.admin-field-span2 { grid-column: 1 / -1; }
