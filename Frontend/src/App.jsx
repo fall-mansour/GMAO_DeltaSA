@@ -20,6 +20,7 @@ import MaintenanceHome from "./Pages/MaintenanceHome";
 import InterventionsPage from "./Pages/InterventionsPage";
 import DeclarationsPage from "./Pages/DeclarationsPage";
 import DashboardPage from "./Pages/DashboardPage";
+import AdminHome from "./Pages/AdminHome";
 
 function App() {
   return (
@@ -49,6 +50,8 @@ function App() {
         <Route path="/Interventions" element={<InterventionsPage />} />
         <Route path="/Declarations" element={<DeclarationsPage />} />
         <Route path="/Dashboard" element={<DashboardPage />} />
+        /*Routes Admin*/
+        <Route path="/AdminHome" element={<AdminHome />} />
       </Routes>
     </Router>
   );
