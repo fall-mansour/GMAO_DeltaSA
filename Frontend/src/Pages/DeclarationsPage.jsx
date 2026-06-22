@@ -1,6 +1,8 @@
+// Frontend/src/pages/DeclarationsPage.jsx
 import { useState } from "react";
-import "../style/DeclarationsPage.css";
+import { useNavigate } from "react-router-dom"; // Importation pour débloquer le routage du bouton Retour
 import logo from "../assets/logo.png";
+import "../style/DeclarationsPage.css";
 
 const EXEMPLE_DECLARATIONS = [
   {
@@ -42,9 +44,9 @@ const EXEMPLE_MECANICIENS = [
 export default function DeclarationsPage({
   declarations = null,
   mecaniciens = null,
-  onBack = () => {},
   onConfirmAssign = () => {},
 }) {
+  const navigate = useNavigate(); // Hook de navigation
   const displayDeclarations = declarations || EXEMPLE_DECLARATIONS;
   const displayMecaniciens = mecaniciens || EXEMPLE_MECANICIENS;
 
@@ -72,17 +74,31 @@ export default function DeclarationsPage({
     setOpenId(null);
   };
 
+  // Gestion du retour propre
+  const handleBack = () => {
+    navigate(-1); // Retourne automatiquement à la page précédente
+  };
+
   return (
-    <div className="dp-page">
+    // MODIFICATION : Forçage du défilement vertical avec minHeight et overflowY de secours
+    <div className="dp-page" style={{ minHeight: "100vh", overflowY: "auto" }}>
       <header className="dp-topbar">
-        <div className="mh-brand">
+        <div
+          className="mh-brand"
+          onClick={() => navigate("/maintenance")}
+          style={{ cursor: "pointer" }}
+        >
           <img src={logo} alt="Delta SA" className="brand-logo" />
           <span className="brand-divider" />
-
           <span className="dp-brand-suffix">GMAO</span>
         </div>
 
-        <button className="dp-back" onClick={onBack}>
+        {/* Correction du bouton avec l'action réactive */}
+        <button
+          className="dp-back"
+          onClick={handleBack}
+          style={{ cursor: "pointer" }}
+        >
           ← Retour à l'accueil
         </button>
       </header>
@@ -122,6 +138,7 @@ export default function DeclarationsPage({
                       <button
                         className={`dp-btn-assign${isOpen ? " is-active" : ""}`}
                         onClick={() => toggleOpen(d.id)}
+                        style={{ cursor: "pointer" }}
                       >
                         {isOpen ? "Fermer" : "Affecter un mécanicien"}
                       </button>
@@ -174,12 +191,14 @@ export default function DeclarationsPage({
                         <button
                           className="dp-btn-cancel"
                           onClick={() => setOpenId(null)}
+                          style={{ cursor: "pointer" }}
                         >
                           Annuler
                         </button>
                         <button
                           className="dp-btn-confirm"
                           onClick={() => handleConfirm(d)}
+                          style={{ cursor: "pointer" }}
                         >
                           Confirmer l'affectation
                         </button>

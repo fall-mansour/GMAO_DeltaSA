@@ -1,0 +1,356 @@
+/* ============================================================
+   ValidationListe.css — Espace Backoffice Table Layout
+   Design : Fullscreen Pro — Strict Bleu Clair & Blanc
+   Polices : Inter & JetBrains Mono (Données techniques)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap");
+
+/* ── CONTENEUR PRINCIPAL FIXÉ AU FULLSCREEN ──────────────── */
+.validation-container {
+  width: 100vw;
+  height: calc(100vh - 73px);
+  margin: 0;
+  padding: 1.2rem 2rem;
+  font-family: "Inter", sans-serif;
+  color: #1a2d42;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  box-sizing: border-box;
+  background-color: #eef4fb;
+  overflow: hidden; /* empêche le double scrollbar */
+}
+
+/* ── EN-TÊTE DE PAGE ─────────────────────────────────────── */
+.validation-header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid #c5ddef;
+  padding-bottom: 0.85rem;
+}
+
+.validation-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #1a2d42;
+  margin: 0 0 0.15rem 0;
+}
+
+.validation-header p {
+  color: #6b8bad;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Badge compteur de requêtes */
+.header-badge-count {
+  background-color: #ffffff;
+  border: 1.5px solid #c5ddef;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.badge-number {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  color: #2b7fd4;
+  font-size: 0.95rem;
+}
+
+.badge-text {
+  font-size: 0.72rem;
+  color: #6b8bad;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ── BARRE DE RECHERCHE ET FILTRES ───────────────────────── */
+.search-filters-bar {
+  background-color: #ffffff;
+  border: 1.5px solid #c5ddef;
+  border-radius: 10px;
+  padding: 0.85rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: relative;
+}
+
+.filter-group label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b8bad;
+  padding-left: 0.2rem;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  background-color: #f4f8fc;
+  border: 1.5px solid #c5ddef;
+  border-radius: 7px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.83rem;
+  color: #1a2d42;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #2b7fd4;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(43, 127, 212, 0.1);
+}
+
+.date-picker {
+  cursor: pointer;
+}
+
+.clear-date-btn {
+  position: absolute;
+  right: 12px;
+  bottom: 9px;
+  background: transparent;
+  border: none;
+  color: #2b7fd4;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── CONTENEUR DE TABLE — PREND TOUT L'ESPACE RESTANT ───── */
+.table-wrapper {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1.5px solid #c5ddef;
+  flex: 1;
+  min-height: 0; /* correctif clé : permet au flex child de réduire sous son contenu */
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.validation-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+/* En-tête de colonne figé lors du scroll */
+.validation-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #ffffff;
+  color: #6b8bad;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  padding: 0.9rem 1.4rem;
+  border-bottom: 2px solid #eef4fb;
+  white-space: nowrap;
+}
+
+/* Largeurs fixes des colonnes */
+.col-vehicle {
+  width: 130px;
+}
+.col-driver {
+  width: 160px;
+}
+.col-desc {
+  /* prend l'espace restant automatiquement */
+}
+.col-date {
+  width: 120px;
+}
+.col-deadline {
+  width: 110px;
+}
+.col-status {
+  width: 120px;
+}
+.col-action {
+  width: 110px;
+  text-align: center;
+}
+
+.validation-table tbody tr {
+  border-bottom: 1px solid #eef4fb;
+  transition: background-color 0.12s ease;
+}
+
+.validation-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.validation-table tbody tr:hover {
+  background-color: #f0f7ff;
+}
+
+.validation-table td {
+  padding: 1.05rem 1.4rem;
+  vertical-align: middle;
+}
+
+/* Style Monospace des numéros de véhicule */
+.vehicle-badge {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.83rem;
+  font-weight: 600;
+  background-color: #eef4fb;
+  color: #2b7fd4;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #c5ddef;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Cellule conducteur avec rôle en sous-titre */
+.driver-cell strong {
+  font-weight: 600;
+  color: #1a2d42;
+  font-size: 0.88rem;
+  display: block;
+}
+
+.driver-cell span {
+  font-size: 0.78rem;
+  color: #6b8bad;
+}
+
+/* Colonne description */
+.description-cell {
+  max-width: 320px;
+}
+
+.desc-text {
+  color: #516d8a;
+  line-height: 1.45;
+  font-size: 0.84rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+/* Dates techniques en Monospace */
+.date-cell {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.79rem;
+  color: #1a2d42;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.text-muted {
+  color: #6b8bad;
+  font-size: 0.75rem;
+}
+
+/* ── PILLS DE PRIORITÉ / STATUT ──────────────────────────── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+
+.status-pending {
+  background-color: #fff8e6;
+  color: #9a6500;
+  border: 1px solid #fad98a;
+}
+
+.status-urgent {
+  background-color: #fff0ee;
+  color: #a63020;
+  border: 1px solid #f5b3ab;
+}
+
+.status-normal {
+  background-color: #eef4fb;
+  color: #2b5fa0;
+  border: 1px solid #b5d4f4;
+}
+
+/* ── BOUTON VALIDER ──────────────────────────────────────── */
+.btn-validate {
+  background-color: #2b7fd4;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.79rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.btn-validate:hover {
+  background-color: #1c6bbf;
+}
+
+.btn-validate:active {
+  transform: scale(0.97);
+}
+
+.action-cell {
+  text-align: center;
+}
+
+.empty-table {
+  text-align: center;
+  padding: 4rem !important;
+  color: #6b8bad;
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .search-filters-bar {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+}

@@ -8,6 +8,8 @@
 }
 
 /* CORRECTION : On force explicitement l'affichage du défilement vertical */
+
+/* APRÈS */
 html,
 body,
 #root {
@@ -15,8 +17,7 @@ body,
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: auto; /* ← remplace les deux overflow séparés */
 }
 
 .mh-page {

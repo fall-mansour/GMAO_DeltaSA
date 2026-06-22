@@ -1,33 +1,80 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../style/Admin.css";
 
 const ROLES = [
-  { value: "chauffeur",    label: "Chauffeur" },
-  { value: "mecanicien",  label: "Mécanicien" },
-  { value: "backoffice",  label: "Back Office" },
+  { value: "chauffeur", label: "Chauffeur" },
+  { value: "mecanicien", label: "Mécanicien" },
+  { value: "backoffice", label: "Back Office" },
   { value: "responsable", label: "Responsable de maintenance" },
-  { value: "admin",       label: "Administrateur" },
+  { value: "admin", label: "Administrateur" },
 ];
 
 const ROLE_CLASS = {
-  chauffeur:    "admin-role-chauffeur",
-  mecanicien:   "admin-role-mecanicien",
-  backoffice:   "admin-role-backoffice",
-  responsable:  "admin-role-responsable",
-  admin:        "admin-role-admin",
+  chauffeur: "admin-role-chauffeur",
+  mecanicien: "admin-role-mecanicien",
+  backoffice: "admin-role-backoffice",
+  responsable: "admin-role-responsable",
+  admin: "admin-role-admin",
 };
 
 const EXEMPLE_UTILISATEURS = [
-  { id: 1, nom: "Diallo",   prenom: "Mamadou",  login: "m.diallo",   role: "chauffeur",    email: "m.diallo@deltasa.sn" },
-  { id: 2, nom: "Ndiaye",   prenom: "Fatou",    login: "f.ndiaye",   role: "mecanicien",   email: "f.ndiaye@deltasa.sn" },
-  { id: 3, nom: "Sow",      prenom: "Ibrahima", login: "i.sow",      role: "backoffice",   email: "i.sow@deltasa.sn" },
-  { id: 4, nom: "Kane",     prenom: "Awa",      login: "a.kane",     role: "responsable",  email: "a.kane@deltasa.sn" },
-  { id: 5, nom: "Ba",       prenom: "Ousmane",  login: "o.ba",       role: "chauffeur",    email: "o.ba@deltasa.sn" },
-  { id: 6, nom: "Fall",     prenom: "Aissatou", login: "a.fall",     role: "mecanicien",   email: "a.fall@deltasa.sn" },
+  {
+    id: 1,
+    nom: "Diallo",
+    prenom: "Mamadou",
+    login: "m.diallo",
+    role: "chauffeur",
+    email: "m.diallo@deltasa.sn",
+  },
+  {
+    id: 2,
+    nom: "Ndiaye",
+    prenom: "Fatou",
+    login: "f.ndiaye",
+    role: "mecanicien",
+    email: "f.ndiaye@deltasa.sn",
+  },
+  {
+    id: 3,
+    nom: "Sow",
+    prenom: "Ibrahima",
+    login: "i.sow",
+    role: "backoffice",
+    email: "i.sow@deltasa.sn",
+  },
+  {
+    id: 4,
+    nom: "Kane",
+    prenom: "Awa",
+    login: "a.kane",
+    role: "responsable",
+    email: "a.kane@deltasa.sn",
+  },
+  {
+    id: 5,
+    nom: "Ba",
+    prenom: "Ousmane",
+    login: "o.ba",
+    role: "chauffeur",
+    email: "o.ba@deltasa.sn",
+  },
+  {
+    id: 6,
+    nom: "Fall",
+    prenom: "Aissatou",
+    login: "a.fall",
+    role: "mecanicien",
+    email: "a.fall@deltasa.sn",
+  },
 ];
 
 const EMPTY_FORM = {
-  nom: "", prenom: "", login: "", email: "", motDePasse: "", role: "",
+  nom: "",
+  prenom: "",
+  login: "",
+  email: "",
+  motDePasse: "",
+  role: "",
 };
 
 export default function GestionUtilisateurs({
@@ -60,7 +107,14 @@ export default function GestionUtilisateurs({
   };
 
   const openEdit = (u) => {
-    setForm({ nom: u.nom, prenom: u.prenom, login: u.login, email: u.email, motDePasse: "", role: u.role });
+    setForm({
+      nom: u.nom,
+      prenom: u.prenom,
+      login: u.login,
+      email: u.email,
+      motDePasse: "",
+      role: u.role,
+    });
     setEditId(u.id);
     setModal("edit");
   };
@@ -72,7 +126,7 @@ export default function GestionUtilisateurs({
       onSave(newUser);
     } else {
       setData((prev) =>
-        prev.map((u) => (u.id === editId ? { ...u, ...form } : u))
+        prev.map((u) => (u.id === editId ? { ...u, ...form } : u)),
       );
       onSave({ ...form, id: editId });
     }
@@ -91,17 +145,21 @@ export default function GestionUtilisateurs({
   return (
     <div className="admin-page">
       <header className="admin-topbar">
-         <div className="mh-brand">
-                                    <img src={logo} alt="Delta SA" className="brand-logo" />
-                                    <span className="brand-divider" />
+        <div className="mh-brand">
+          <img src="../assets/logo.png" alt="Delta SA" className="brand-logo" />
+          <span className="brand-divider" />
           <span className="admin-brand-suffix">GMAO</span>
         </div>
 
-        <button className="admin-back" onClick={onBack}>← Retour</button>
+        <button className="admin-back" onClick={onBack}>
+          ← Retour
+        </button>
 
         <div className="admin-user">
           <div className="admin-divider-vert" />
-          <button className="admin-logout" onClick={onLogout}>Déconnexion</button>
+          <button className="admin-logout" onClick={onLogout}>
+            Déconnexion
+          </button>
         </div>
       </header>
 
@@ -129,7 +187,9 @@ export default function GestionUtilisateurs({
               >
                 <option value="">Tous les rôles</option>
                 {ROLES.map((r) => (
-                  <option key={r.value} value={r.value}>{r.label}</option>
+                  <option key={r.value} value={r.value}>
+                    {r.label}
+                  </option>
                 ))}
               </select>
               <button className="admin-btn-add" onClick={openAdd}>
@@ -151,19 +211,29 @@ export default function GestionUtilisateurs({
             <tbody>
               {filtered.map((u) => (
                 <tr key={u.id}>
-                  <td className="admin-table-name">{u.prenom} {u.nom}</td>
+                  <td className="admin-table-name">
+                    {u.prenom} {u.nom}
+                  </td>
                   <td>{u.login}</td>
                   <td>{u.email}</td>
                   <td>
-                    <span className={`admin-role-badge ${ROLE_CLASS[u.role] || ""}`}>
+                    <span
+                      className={`admin-role-badge ${ROLE_CLASS[u.role] || ""}`}
+                    >
                       {ROLES.find((r) => r.value === u.role)?.label || u.role}
                     </span>
                   </td>
                   <td>
-                    <button className="admin-btn-edit" onClick={() => openEdit(u)}>
+                    <button
+                      className="admin-btn-edit"
+                      onClick={() => openEdit(u)}
+                    >
                       Modifier
                     </button>
-                    <button className="admin-btn-delete" onClick={() => setConfirmDelete(u)}>
+                    <button
+                      className="admin-btn-delete"
+                      onClick={() => setConfirmDelete(u)}
+                    >
                       Supprimer
                     </button>
                   </td>
@@ -171,7 +241,14 @@ export default function GestionUtilisateurs({
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={5} style={{ textAlign: "center", color: "#8a90a0", padding: "32px" }}>
+                  <td
+                    colSpan={5}
+                    style={{
+                      textAlign: "center",
+                      color: "#8a90a0",
+                      padding: "32px",
+                    }}
+                  >
                     Aucun utilisateur trouvé.
                   </td>
                 </tr>
@@ -186,43 +263,81 @@ export default function GestionUtilisateurs({
         <div className="admin-modal-overlay">
           <div className="admin-modal">
             <h2 className="admin-modal-title">
-              {modal === "add" ? "Ajouter un utilisateur" : "Modifier l'utilisateur"}
+              {modal === "add"
+                ? "Ajouter un utilisateur"
+                : "Modifier l'utilisateur"}
             </h2>
 
             <div className="admin-form-grid">
               <div className="admin-field">
                 <label>Nom</label>
-                <input value={form.nom} onChange={(e) => updateForm("nom", e.target.value)} placeholder="Diallo" />
+                <input
+                  value={form.nom}
+                  onChange={(e) => updateForm("nom", e.target.value)}
+                  placeholder="Diallo"
+                />
               </div>
               <div className="admin-field">
                 <label>Prénom</label>
-                <input value={form.prenom} onChange={(e) => updateForm("prenom", e.target.value)} placeholder="Mamadou" />
+                <input
+                  value={form.prenom}
+                  onChange={(e) => updateForm("prenom", e.target.value)}
+                  placeholder="Mamadou"
+                />
               </div>
               <div className="admin-field">
                 <label>Login</label>
-                <input value={form.login} onChange={(e) => updateForm("login", e.target.value)} placeholder="m.diallo" />
+                <input
+                  value={form.login}
+                  onChange={(e) => updateForm("login", e.target.value)}
+                  placeholder="m.diallo"
+                />
               </div>
               <div className="admin-field">
                 <label>Email</label>
-                <input type="email" value={form.email} onChange={(e) => updateForm("email", e.target.value)} placeholder="m.diallo@deltasa.sn" />
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => updateForm("email", e.target.value)}
+                  placeholder="m.diallo@deltasa.sn"
+                />
               </div>
               <div className="admin-field admin-field-span2">
-                <label>{modal === "edit" ? "Nouveau mot de passe (laisser vide pour ne pas changer)" : "Mot de passe"}</label>
-                <input type="password" value={form.motDePasse} onChange={(e) => updateForm("motDePasse", e.target.value)} placeholder="••••••••" />
+                <label>
+                  {modal === "edit"
+                    ? "Nouveau mot de passe (laisser vide pour ne pas changer)"
+                    : "Mot de passe"}
+                </label>
+                <input
+                  type="password"
+                  value={form.motDePasse}
+                  onChange={(e) => updateForm("motDePasse", e.target.value)}
+                  placeholder="••••••••"
+                />
               </div>
               <div className="admin-field admin-field-span2">
                 <label>Rôle</label>
-                <select value={form.role} onChange={(e) => updateForm("role", e.target.value)}>
+                <select
+                  value={form.role}
+                  onChange={(e) => updateForm("role", e.target.value)}
+                >
                   <option value="">Sélectionner un rôle</option>
                   {ROLES.map((r) => (
-                    <option key={r.value} value={r.value}>{r.label}</option>
+                    <option key={r.value} value={r.value}>
+                      {r.label}
+                    </option>
                   ))}
                 </select>
               </div>
             </div>
 
             <div className="admin-modal-footer">
-              <button className="admin-btn-cancel" onClick={() => setModal(null)}>Annuler</button>
+              <button
+                className="admin-btn-cancel"
+                onClick={() => setModal(null)}
+              >
+                Annuler
+              </button>
               <button className="admin-btn-save" onClick={handleSave}>
                 {modal === "add" ? "Créer l'utilisateur" : "Enregistrer"}
               </button>
@@ -236,16 +351,38 @@ export default function GestionUtilisateurs({
         <div className="admin-modal-overlay">
           <div className="admin-modal">
             <h2 className="admin-modal-title">Confirmer la suppression</h2>
-            <p style={{ color: "#3a4150", marginBottom: "28px", fontSize: "15px" }}>
+            <p
+              style={{
+                color: "#3a4150",
+                marginBottom: "28px",
+                fontSize: "15px",
+              }}
+            >
               Voulez-vous vraiment supprimer le compte de{" "}
-              <strong>{confirmDelete.prenom} {confirmDelete.nom}</strong> ?
-              Cette action est irréversible.
+              <strong>
+                {confirmDelete.prenom} {confirmDelete.nom}
+              </strong>{" "}
+              ? Cette action est irréversible.
             </p>
             <div className="admin-modal-footer">
-              <button className="admin-btn-cancel" onClick={() => setConfirmDelete(null)}>Annuler</button>
+              <button
+                className="admin-btn-cancel"
+                onClick={() => setConfirmDelete(null)}
+              >
+                Annuler
+              </button>
               <button
                 onClick={() => handleDelete(confirmDelete.id)}
-                style={{ background: "#b3372f", color: "white", border: "none", fontSize: "14px", fontWeight: 700, padding: "11px 22px", borderRadius: "9px", cursor: "pointer" }}
+                style={{
+                  background: "#b3372f",
+                  color: "white",
+                  border: "none",
+                  fontSize: "14px",
+                  fontWeight: 700,
+                  padding: "11px 22px",
+                  borderRadius: "9px",
+                  cursor: "pointer",
+                }}
               >
                 Supprimer
               </button>

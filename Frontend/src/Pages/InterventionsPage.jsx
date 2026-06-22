@@ -1,6 +1,8 @@
-import "../style/InterventionsPage.css";
+// Frontend/src/pages/InterventionsPage.jsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importation pour corriger le bouton Retour
 import logo from "../assets/logo.png";
+import "../style/InterventionsPage.css";
 
 const EXEMPLE_INTERVENTIONS = [
   {
@@ -54,28 +56,42 @@ function formatCout(cout) {
   return `${Number(cout).toLocaleString("fr-FR")} FCFA`;
 }
 
-export default function InterventionsPage({
-  interventions = null,
-  onBack = () => {},
-}) {
-  const displayInterventions = interventions || EXEMPLE_INTERVENTIONS;
+export default function InterventionsPage({ interventions = null }) {
+  const navigate = useNavigate(); // Utilisation du hook de navigation natif
   const [filtre, setFiltre] = useState("toutes");
+
+  const displayInterventions = interventions || EXEMPLE_INTERVENTIONS;
 
   const filtered =
     filtre === "toutes"
       ? displayInterventions
       : displayInterventions.filter((i) => i.statut === filtre);
 
+  // Gestion du retour propre à l'historique du navigateur
+  const handleBack = () => {
+    navigate(-1); // Retourne automatiquement à la page précédente (ex: l'accueil maintenance)
+  };
+
   return (
-    <div className="ip-page">
+    // AJOUT : Déblocage direct du scroll vertical avec style en ligne de secours
+    <div className="ip-page" style={{ minHeight: "100vh", overflowY: "auto" }}>
       <header className="ip-topbar">
-        <div className="mh-brand">
+        <div
+          className="mh-brand"
+          onClick={() => navigate("/maintenance")}
+          style={{ cursor: "pointer" }}
+        >
           <img src={logo} alt="Delta SA" className="brand-logo" />
           <span className="brand-divider" />
           <span className="ip-brand-suffix">GMAO</span>
         </div>
 
-        <button className="ip-back" onClick={onBack}>
+        {/* Correction du bouton avec la navigation réactive */}
+        <button
+          className="ip-back"
+          onClick={handleBack}
+          style={{ cursor: "pointer" }}
+        >
           ← Retour à l'accueil
         </button>
       </header>
@@ -97,6 +113,7 @@ export default function InterventionsPage({
               key={f.key}
               className={`ip-filter-btn${filtre === f.key ? " is-active" : ""}`}
               onClick={() => setFiltre(f.key)}
+              style={{ cursor: "pointer" }}
             >
               {f.label}
             </button>
@@ -131,9 +148,7 @@ export default function InterventionsPage({
                   <div className="ip-attr">
                     <span className="ip-attr-label">Date de début</span>
                     <span
-                      className={`ip-attr-value${
-                        !i.dateDebut ? " is-muted" : ""
-                      }`}
+                      className={`ip-attr-value${!i.dateDebut ? " is-muted" : ""}`}
                     >
                       {i.dateDebut || "Non démarrée"}
                     </span>
@@ -142,9 +157,7 @@ export default function InterventionsPage({
                   <div className="ip-attr">
                     <span className="ip-attr-label">Date de fin</span>
                     <span
-                      className={`ip-attr-value${
-                        !i.dateFin ? " is-muted" : ""
-                      }`}
+                      className={`ip-attr-value${!i.dateFin ? " is-muted" : ""}`}
                     >
                       {i.dateFin || "—"}
                     </span>
@@ -161,9 +174,7 @@ export default function InterventionsPage({
                 <div className="ip-details">
                   <p className="ip-details-label">Détails de la réparation</p>
                   <p
-                    className={`ip-details-text${
-                      !i.detailsReparation ? " is-muted" : ""
-                    }`}
+                    className={`ip-details-text${!i.detailsReparation ? " is-muted" : ""}`}
                   >
                     {i.detailsReparation ||
                       "Aucun détail renseigné pour le moment."}

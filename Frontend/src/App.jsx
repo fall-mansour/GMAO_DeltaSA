@@ -1,12 +1,9 @@
 import "./App.css";
 import HomeChauffeur from "./Pages/Accueilchauffeur";
-import ValidationListe from "./Pages/validation";
 import HistoriqueBackoffice from "./Pages/HistoriqueBackoff";
 import SuiviChauffeur from "./Pages/Suivichauffeur";
 import SuiviReparation from "./Pages/Suivireparation";
 import Login from "./Pages/Login";
-import AccueilAdmin from "./Pages/AccueilAdmin";
-import GestionUtilisateurs from "./Pages/GestionUtilisateurs";
 import MaintenanceHome from "./Pages/MaintenanceHome";
 import DashboardPage from "./Pages/DashboardPage";
 import DeclarationsPage from "./Pages/DeclarationsPage";
@@ -17,7 +14,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
   useNavigate,
 } from "react-router-dom";
 import Declaration from "./Pages/Declaration";
@@ -25,11 +21,6 @@ import HomeMecano from "./Pages/Accueilmecano";
 import AffectationsMecano from "./Pages/AffectationMecano";
 import AccueilBackOffice from "./Pages/AccueilBackOffice";
 import Rapports from "./Pages/Rapports";
-import MaintenanceHome from "./Pages/MaintenanceHome";
-import InterventionsPage from "./Pages/InterventionsPage";
-import DeclarationsPage from "./Pages/DeclarationsPage";
-import DashboardPage from "./Pages/DashboardPage";
-import AdminHome from "./Pages/AdminHome";
 
 function HomeWrapper() {
   const navigate = useNavigate();
@@ -68,7 +59,7 @@ function App() {
         <Route path="/SuiviChauffeur" element={<SuiviChauffeur />} />
 
         {/* Espace Back Office */}
-        <Route path="/validation" element={<ValidationListe />} />
+
         <Route path="/HistoBackoff" element={<HistoriqueBackoffice />} />
         <Route path="/Accueilbackoff" element={<AccueilBackOffice />} />
         <Route path="/Rapport" element={<Rapports />} />
@@ -86,9 +77,8 @@ function App() {
         <Route path="/dashboard" element={<DashboardWrapper />} />
         <Route path="/declarations" element={<DeclarationsWrapper />} />
         <Route path="/interventions" element={<InterventionsWrapper />} />
-        <Route path="AcceuilAdmin" element={<AccueilAdmin />} />
-        <Route path="utilisateur" element={<GestionUtilisateurs/>}/>
-        <Route path="camions" element={<GestionCamions/>}/>
+
+        <Route path="/camions" element={<GestionCamions />} />
       </Routes>
     </Router>
   );
