@@ -1,0 +1,349 @@
+/* ============================================================
+   AjoutVehicule.css — Ajout Véhicule
+   Layout : 50/50 split | Form left | Hero image right
+   Palette : Bleu clair & blanc — cohérent Delta SA
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@500;600&display=swap");
+
+/* ── FULLSCREEN FIX ──────────────────────────────────────── */
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── CONTAINER SPLIT ─────────────────────────────────────── */
+.ajout-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  color: #1a2d42;
+}
+
+/* ══════════════════════════════════════════════════════════
+   GAUCHE — Formulaire
+══════════════════════════════════════════════════════════ */
+.ajout-card {
+  flex: 0 0 50%;
+  width: 50%;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.5rem 4.5rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Liseré bleu gauche */
+.ajout-card::after {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 3px;
+  height: 70%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #2b7fd4 25%,
+    #a8ccf0 75%,
+    transparent
+  );
+  border-radius: 0 2px 2px 0;
+}
+
+/* Wash bleu coin haut-gauche */
+.ajout-card::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(
+    circle,
+    rgba(43, 127, 212, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.ajout-header {
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ajout-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2b7fd4;
+  background: #eef4fb;
+  border: 1px solid #c5ddef;
+  padding: 0.3rem 0.8rem;
+  border-radius: 100px;
+  margin-bottom: 1.2rem;
+}
+
+.ajout-header h2 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #1a2d42;
+  margin-bottom: 0.5rem;
+}
+
+.ajout-header h2::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  background: #2b7fd4;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+}
+
+.ajout-header p {
+  font-size: 0.875rem;
+  color: #6b8bad;
+  line-height: 1.6;
+}
+
+/* ── FORM ────────────────────────────────────────────────── */
+.ajout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #6b8bad;
+  transition: color 0.2s ease;
+}
+
+.form-group:focus-within label {
+  color: #2b7fd4;
+}
+
+.required {
+  color: #e05555;
+  margin-left: 2px;
+}
+
+/* Input avec icône */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.9rem;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  background: #eef4fb;
+  border: 1.5px solid #c5ddef;
+  border-radius: 8px;
+  color: #1a2d42;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  padding: 0.8rem 1rem 0.8rem 2.8rem;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Immatriculation en monospace */
+#immatriculation {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.form-group input::placeholder {
+  color: #a8ccf0;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2b7fd4;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(43, 127, 212, 0.12);
+}
+
+.form-group input:hover:not(:focus),
+.form-group select:hover:not(:focus) {
+  border-color: #a8ccf0;
+}
+
+/* Flèche select custom */
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232B7FD4' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-color: #eef4fb;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: #ffffff;
+  color: #1a2d42;
+}
+
+/* ── BOUTON ──────────────────────────────────────────────── */
+.submit-btn {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  background: #2b7fd4;
+  color: #ffffff;
+  font-family: "Syne", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.45s ease;
+}
+
+.submit-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.submit-btn:hover {
+  background: #1c6bbf;
+  box-shadow: 0 6px 24px rgba(43, 127, 212, 0.3);
+  transform: translateY(-2px);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════════════════════
+   DROITE — Hero Image
+   ⚠ Remplace l'URL par ton image
+══════════════════════════════════════════════════════════ */
+.ajout-hero {
+  flex: 0 0 50%;
+  width: 50%;
+  height: 100vh;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(43, 127, 212, 0.06) 100%
+    ),
+    url("../assets/vehicule1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  html,
+  body,
+  #root {
+    overflow: auto;
+    height: auto;
+  }
+
+  .ajout-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .ajout-logo {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 1.8rem;
+    display: block;
+  }
+
+  .ajout-card,
+  .ajout-hero {
+    flex: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .ajout-hero {
+    min-height: 260px;
+    order: -1;
+  }
+
+  .ajout-card {
+    padding: 2.5rem 1.5rem;
+  }
+}

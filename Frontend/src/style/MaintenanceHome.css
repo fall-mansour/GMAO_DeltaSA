@@ -1,0 +1,627 @@
+/* ============================================================
+   MaintenanceHome.css
+   Page d'accueil - Responsable de maintenance - GMAO Delta SA
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+/* CORRECTION : On force explicitement l'affichage du défilement vertical */
+
+/* APRÈS */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto; /* ← remplace les deux overflow séparés */
+}
+
+.mh-page {
+  font-family: "Segoe UI", Arial, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background: #eef3fb;
+  color: #1a1f29;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- HEADER ---------- */
+
+.mh-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f3;
+  padding: 16px 56px; /* Légèrement réduit pour un header plus élégant */
+  position: sticky; /* Reste fixé en haut lors du défilement */
+  top: 0;
+  z-index: 100;
+}
+
+.mh-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-logo {
+  height: 50px; /* Réduit pour éviter les déformations de ligne */
+  display: block;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 30px;
+  background: #d7dbe2;
+}
+
+.brand-suffix {
+  font-size: 16px;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.mh-nav {
+  display: flex;
+  gap: 40px;
+}
+
+.mh-nav-link {
+  text-decoration: none;
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 6px;
+  border-bottom: 2px solid transparent;
+  transition: 0.15s;
+}
+
+.mh-nav-link:hover {
+  color: #1a1f29;
+}
+
+.mh-nav-link.is-active {
+  color: #1d6fd9;
+  font-weight: 600;
+  border-bottom-color: #1d6fd9;
+}
+
+.mh-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.mh-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mh-user-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1f29;
+}
+
+.mh-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #e6edfb;
+  color: #1d6fd9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.mh-divider-vert {
+  width: 1px;
+  height: 24px;
+  background: #e2e8f3;
+}
+
+/* CORRECTION : Harmonisation esthétique du bouton de déconnexion */
+.mh-logout {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #1d6fd9;
+  border: 1px solid;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mh-logout:hover {
+  background: #fbebeb;
+  border-color: #f0c9c9;
+  color: #b3372f;
+}
+
+/* ---------- CONTENU ---------- */
+
+.mh-content {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px 56px 80px;
+  flex: 1; /* Permet au contenu de pousser la page vers le bas */
+}
+
+.mh-heading-row {
+  margin-bottom: 36px;
+}
+
+.mh-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1d6fd9;
+  margin: 0 0 8px;
+}
+
+.mh-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0;
+  color: #11151b;
+}
+
+/* ---------- SECTIONS ---------- */
+
+.mh-section {
+  margin-bottom: 40px;
+}
+
+.mh-section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.mh-section-label .mh-section-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1d6fd9;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mh-section-label span.mh-section-text {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #5b6477;
+}
+
+/* ---------- TABLEAU DE BORD ---------- */
+
+.mh-stats-panel {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 18px;
+  padding: 32px 36px;
+}
+
+.mh-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.mh-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f3f8fe;
+  border-radius: 14px;
+  padding: 20px 18px;
+}
+
+.mh-stat-label {
+  font-size: 13px;
+  color: #5b6477;
+  font-weight: 600;
+}
+
+.mh-stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #11151b;
+}
+
+.mh-stats-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 22px;
+}
+
+.mh-stats-link {
+  background: #1d6fd9;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 12px 22px;
+  border-radius: 9px;
+  transition: 0.15s;
+}
+
+.mh-stats-link:hover {
+  background: #185fc0;
+}
+
+/* ---------- DECLARATIONS ---------- */
+
+.mh-primary {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 18px;
+  padding: 32px 36px;
+}
+
+.mh-primary-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.mh-primary-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #11151b;
+}
+
+.mh-primary-sub {
+  font-size: 16px;
+  color: #5b6477;
+  margin: 0;
+  max-width: 540px;
+}
+
+.mh-btn-text {
+  background: none;
+  border: none;
+  color: #1d6fd9;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.mh-btn-text:hover {
+  text-decoration: underline;
+}
+
+.mh-decl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mh-decl-card {
+  background: #f9fbfe;
+  border: 1px solid #e2e8f3;
+  border-radius: 14px;
+  padding: 22px 26px;
+  transition: 0.2s;
+}
+
+.mh-decl-card.is-open {
+  border-color: #1d6fd9;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(29, 111, 217, 0.08);
+}
+
+.mh-decl-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mh-decl-main {
+  flex: 1;
+}
+
+.mh-decl-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.mh-queue-truck {
+  font-weight: 700;
+  color: #11151b;
+  font-size: 16px;
+}
+
+.mh-queue-date {
+  font-size: 13px;
+  color: #8a90a0;
+}
+
+.mh-queue-desc {
+  font-size: 14.5px;
+  color: #3a4150;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 560px;
+}
+
+.mh-btn-assign {
+  flex-shrink: 0;
+  background: #1d6fd9;
+  color: #ffffff;
+  border: none;
+  border-radius: 9px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.15s;
+}
+
+.mh-btn-assign:hover {
+  background: #185fc0;
+}
+
+.mh-btn-assign.is-active {
+  background: #eef3fb;
+  color: #1d6fd9;
+  border: 1px solid #c7d6ef;
+}
+
+/* ---------- FORMULAIRE INLINE D'AFFECTATION ---------- */
+
+.mh-assign-form {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid #eef1f6;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+}
+
+.mh-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mh-field label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #5b6477;
+}
+
+.mh-field select,
+.mh-field input {
+  border: 1px solid #d7dbe2;
+  border-radius: 9px;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #11151b;
+  background: #ffffff;
+}
+
+.mh-field select:focus,
+.mh-field input:focus {
+  outline: none;
+  border-color: #1d6fd9;
+}
+
+.mh-assign-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.mh-btn-cancel {
+  background: none;
+  border: 1px solid #d7dbe2;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.mh-btn-cancel:hover {
+  background: #f5f6f8;
+}
+
+.mh-btn-confirm {
+  background: #1d6fd9;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.mh-btn-confirm:hover {
+  background: #185fc0;
+}
+
+/* ---------- INTERVENTIONS ---------- */
+
+.mh-secondary {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 18px;
+  padding: 32px 36px;
+}
+
+.mh-secondary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.mh-secondary-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: #11151b;
+}
+
+.mh-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mh-list-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 22px;
+  border-radius: 12px;
+  font-size: 15.5px;
+}
+
+.mh-list-row:nth-child(odd) {
+  background: #f9fbfe;
+}
+
+.mh-list-truck {
+  font-weight: 700;
+  color: #11151b;
+  width: 150px;
+  font-size: 16px;
+}
+
+.mh-list-mecano {
+  color: #6b7280;
+  flex: 1;
+}
+
+.mh-pill {
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.mh-pill-attente {
+  background: #fdeebd;
+  color: #8a6300;
+}
+
+.mh-pill-cours {
+  background: #d9e8fb;
+  color: #1d6fd9;
+}
+
+.mh-pill-terminee {
+  background: #d7f3df;
+  color: #1d8a4a;
+}
+
+/* ---------- ETATS VIDES ---------- */
+
+.mh-empty {
+  border: 1px dashed #c7d6ef;
+  border-radius: 10px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fbfe;
+}
+
+.mh-empty-compact {
+  padding: 20px;
+}
+
+.mh-empty-text {
+  font-size: 13.5px;
+  color: #8a90a0;
+  margin: 0;
+  text-align: center;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1100px) {
+  .mh-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .mh-nav {
+    display: none;
+  }
+
+  .mh-content {
+    padding: 32px 20px;
+  }
+
+  .mh-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mh-decl-head {
+    flex-direction: column;
+  }
+
+  .mh-btn-assign {
+    width: 100%;
+  }
+
+  .mh-assign-form {
+    grid-template-columns: 1fr;
+  }
+
+  .mh-list-row {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .mh-stats {
+    grid-template-columns: 1fr;
+  }
+}
