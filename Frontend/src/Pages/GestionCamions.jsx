@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+// Frontend/src/pages/GestionCamions.jsx
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importation du hook de routage
 import "../style/Admin.css";
+import logo from "../assets/logo.png"; // Importation propre du logo
 
 /**
  * Page Gestion des camions - Administrateur
- * Application GMAO - Delta SA
- *
- * Tableau des camions avec :
- * - Recherche par immatriculation / modèle
- * - Ajout / modification / suppression de camion
- * - Rattachement de jusqu'à 2 chauffeurs par camion
- * - Affichage de l'état du camion (disponible, en panne, entretien)
+ * Application SmartTech Central
  */
 
 const ETATS = [
   { value: "disponible", label: "Disponible" },
-  { value: "panne",      label: "En panne" },
-  { value: "entretien",  label: "En entretien" },
+  { value: "panne", label: "En panne" },
+  { value: "entretien", label: "En entretien" },
 ];
 
 const ETAT_CLASS = {
   disponible: "admin-etat-dispo",
-  panne:      "admin-etat-panne",
-  entretien:  "admin-etat-entretien",
+  panne: "admin-etat-panne",
+  entretien: "admin-etat-entretien",
 };
 
 const EXEMPLE_CHAUFFEURS = [
@@ -33,25 +30,59 @@ const EXEMPLE_CHAUFFEURS = [
 ];
 
 const EXEMPLE_CAMIONS = [
-  { id: 1, immatriculation: "DK-1234-AB", modele: "Mercedes Actros",    etat: "disponible", chauffeurs: [1, 2] },
-  { id: 2, immatriculation: "DK-5678-CD", modele: "Renault Premium",    etat: "panne",      chauffeurs: [3] },
-  { id: 3, immatriculation: "DK-9012-EF", modele: "Volvo FH",           etat: "disponible", chauffeurs: [4, 5] },
-  { id: 4, immatriculation: "DK-3456-GH", modele: "MAN TGX",            etat: "entretien",  chauffeurs: [] },
-  { id: 5, immatriculation: "DK-7890-IJ", modele: "Scania R450",        etat: "disponible", chauffeurs: [1] },
+  {
+    id: 1,
+    immatriculation: "DK-1234-AB",
+    modele: "Mercedes Actros",
+    etat: "disponible",
+    chauffeurs: [1, 2],
+  },
+  {
+    id: 2,
+    immatriculation: "DK-5678-CD",
+    modele: "Renault Premium",
+    etat: "panne",
+    chauffeurs: [3],
+  },
+  {
+    id: 3,
+    immatriculation: "DK-9012-EF",
+    modele: "Volvo FH",
+    etat: "disponible",
+    chauffeurs: [4, 5],
+  },
+  {
+    id: 4,
+    immatriculation: "DK-3456-GH",
+    modele: "MAN TGX",
+    etat: "entretien",
+    chauffeurs: [],
+  },
+  {
+    id: 5,
+    immatriculation: "DK-7890-IJ",
+    modele: "Scania R450",
+    etat: "disponible",
+    chauffeurs: [1],
+  },
 ];
 
 const EMPTY_FORM = {
-  immatriculation: "", modele: "", etat: "disponible", chauffeurs: [],
+  immatriculation: "",
+  modele: "",
+  etat: "disponible",
+  chauffeurs: [],
 };
 
 export default function GestionCamions({
   camions = null,
   chauffeurs = null,
-  onBack = () => {},
-  onLogout = () => {},
   onSave = () => {},
   onDelete = () => {},
 }) {
+  // 1. Initialisation de la constante de navigation
+  const navigate = useNavigate();
+
   const allChauffeurs = chauffeurs || EXEMPLE_CHAUFFEURS;
   const [data, setData] = useState(camions || EXEMPLE_CAMIONS);
   const [search, setSearch] = useState("");
@@ -60,10 +91,17 @@ export default function GestionCamions({
   const [editId, setEditId] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
+  // Gestion centrale de la déconnexion
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    sessionStorage.clear();
+    navigate("/login"); // Redirection immédiate
+  };
+
   const filtered = data.filter((c) =>
     `${c.immatriculation} ${c.modele}`
       .toLowerCase()
-      .includes(search.toLowerCase())
+      .includes(search.toLowerCase()),
   );
 
   const getChauffeurNom = (id) =>
@@ -104,7 +142,7 @@ export default function GestionCamions({
       onSave(newCamion);
     } else {
       setData((prev) =>
-        prev.map((c) => (c.id === editId ? { ...c, ...form } : c))
+        prev.map((c) => (c.id === editId ? { ...c, ...form } : c)),
       );
       onSave({ ...form, id: editId });
     }
@@ -121,19 +159,40 @@ export default function GestionCamions({
     setForm((prev) => ({ ...prev, [field]: value }));
 
   return (
-    <div className="admin-page">
+    // MODIFICATION PRINCIPALE : Forçage du défilement avec styles inline de sécurité
+    <div
+      className="admin-page"
+      style={{ minHeight: "100vh", overflowY: "auto" }}
+    >
       <header className="admin-topbar">
-         <div className="mh-brand">
-                                    <img src={logo} alt="Delta SA" className="brand-logo" />
-                                    <span className="brand-divider" />
+        <div
+          className="mh-brand"
+          onClick={() => navigate("/admin")}
+          style={{ cursor: "pointer" }}
+        >
+          <img src={logo} alt="Delta SA" className="brand-logo" />
+          <span className="brand-divider" />
           <span className="admin-brand-suffix">GMAO</span>
         </div>
 
-        <button className="admin-back" onClick={onBack}>← Retour</button>
+        {/* Câblage direct et dynamique du bouton Retour vers l'accueil admin */}
+        <button
+          className="admin-back"
+          onClick={() => navigate(-1)}
+          style={{ cursor: "pointer" }}
+        >
+          ← Retour
+        </button>
 
         <div className="admin-user">
           <div className="admin-divider-vert" />
-          <button className="admin-logout" onClick={onLogout}>Déconnexion</button>
+          <button
+            className="admin-logout"
+            onClick={handleLogout}
+            style={{ cursor: "pointer" }}
+          >
+            Déconnexion
+          </button>
         </div>
       </header>
 
@@ -152,7 +211,11 @@ export default function GestionCamions({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button className="admin-btn-add" onClick={openAdd}>
+              <button
+                className="admin-btn-add"
+                onClick={openAdd}
+                style={{ cursor: "pointer" }}
+              >
                 + Ajouter un camion
               </button>
             </div>
@@ -174,7 +237,9 @@ export default function GestionCamions({
                   <td className="admin-table-name">{c.immatriculation}</td>
                   <td>{c.modele}</td>
                   <td>
-                    <span className={`admin-etat-badge ${ETAT_CLASS[c.etat] || ""}`}>
+                    <span
+                      className={`admin-etat-badge ${ETAT_CLASS[c.etat] || ""}`}
+                    >
                       {ETATS.find((e) => e.value === c.etat)?.label || c.etat}
                     </span>
                   </td>
@@ -194,10 +259,18 @@ export default function GestionCamions({
                     )}
                   </td>
                   <td>
-                    <button className="admin-btn-edit" onClick={() => openEdit(c)}>
+                    <button
+                      className="admin-btn-edit"
+                      onClick={() => openEdit(c)}
+                      style={{ cursor: "pointer" }}
+                    >
                       Modifier
                     </button>
-                    <button className="admin-btn-delete" onClick={() => setConfirmDelete(c)}>
+                    <button
+                      className="admin-btn-delete"
+                      onClick={() => setConfirmDelete(c)}
+                      style={{ cursor: "pointer" }}
+                    >
                       Supprimer
                     </button>
                   </td>
@@ -205,7 +278,14 @@ export default function GestionCamions({
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={5} style={{ textAlign: "center", color: "#8a90a0", padding: "32px" }}>
+                  <td
+                    colSpan={5}
+                    style={{
+                      textAlign: "center",
+                      color: "#8a90a0",
+                      padding: "32px",
+                    }}
+                  >
                     Aucun camion trouvé.
                   </td>
                 </tr>
@@ -228,7 +308,9 @@ export default function GestionCamions({
                 <label>Immatriculation</label>
                 <input
                   value={form.immatriculation}
-                  onChange={(e) => updateForm("immatriculation", e.target.value)}
+                  onChange={(e) =>
+                    updateForm("immatriculation", e.target.value)
+                  }
                   placeholder="DK-1234-AB"
                 />
               </div>
@@ -247,7 +329,9 @@ export default function GestionCamions({
                   onChange={(e) => updateForm("etat", e.target.value)}
                 >
                   {ETATS.map((e) => (
-                    <option key={e.value} value={e.value}>{e.label}</option>
+                    <option key={e.value} value={e.value}>
+                      {e.label}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -256,10 +340,18 @@ export default function GestionCamions({
                 <label>
                   Chauffeurs rattachés{" "}
                   <span style={{ color: "#8a90a0", fontWeight: 400 }}>
-                    (maximum 2 — {form.chauffeurs.length}/2 sélectionné{form.chauffeurs.length > 1 ? "s" : ""})
+                    (maximum 2 — {form.chauffeurs.length}/2 sélectionné
+                    {form.chauffeurs.length > 1 ? "s" : ""})
                   </span>
                 </label>
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "4px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "8px",
+                    marginTop: "4px",
+                  }}
+                >
                   {allChauffeurs.map((ch) => {
                     const selected = form.chauffeurs.includes(ch.id);
                     const disabled = !selected && form.chauffeurs.length >= 2;
@@ -267,10 +359,14 @@ export default function GestionCamions({
                       <label
                         key={ch.id}
                         style={{
-                          display: "flex", alignItems: "center", gap: "10px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
                           padding: "10px 14px",
                           borderRadius: "8px",
-                          border: selected ? "1px solid #1d6fd9" : "1px solid #e2e8f3",
+                          border: selected
+                            ? "1px solid #1d6fd9"
+                            : "1px solid #e2e8f3",
                           background: selected ? "#eef3fb" : "#f9fbfe",
                           cursor: disabled ? "not-allowed" : "pointer",
                           opacity: disabled ? 0.5 : 1,
@@ -292,8 +388,18 @@ export default function GestionCamions({
             </div>
 
             <div className="admin-modal-footer">
-              <button className="admin-btn-cancel" onClick={() => setModal(null)}>Annuler</button>
-              <button className="admin-btn-save" onClick={handleSave}>
+              <button
+                className="admin-btn-cancel"
+                onClick={() => setModal(null)}
+                style={{ cursor: "pointer" }}
+              >
+                Annuler
+              </button>
+              <button
+                className="admin-btn-save"
+                onClick={handleSave}
+                style={{ cursor: "pointer" }}
+              >
                 {modal === "add" ? "Créer le camion" : "Enregistrer"}
               </button>
             </div>
@@ -306,16 +412,37 @@ export default function GestionCamions({
         <div className="admin-modal-overlay">
           <div className="admin-modal">
             <h2 className="admin-modal-title">Confirmer la suppression</h2>
-            <p style={{ color: "#3a4150", marginBottom: "28px", fontSize: "15px" }}>
+            <p
+              style={{
+                color: "#3a4150",
+                marginBottom: "28px",
+                fontSize: "15px",
+              }}
+            >
               Voulez-vous vraiment supprimer le camion{" "}
-              <strong>{confirmDelete.immatriculation}</strong> ?
-              Cette action est irréversible.
+              <strong>{confirmDelete.immatriculation}</strong> ? Cette action
+              est irréversible.
             </p>
             <div className="admin-modal-footer">
-              <button className="admin-btn-cancel" onClick={() => setConfirmDelete(null)}>Annuler</button>
+              <button
+                className="admin-btn-cancel"
+                onClick={() => setConfirmDelete(null)}
+                style={{ cursor: "pointer" }}
+              >
+                Annuler
+              </button>
               <button
                 onClick={() => handleDelete(confirmDelete.id)}
-                style={{ background: "#b3372f", color: "white", border: "none", fontSize: "14px", fontWeight: 700, padding: "11px 22px", borderRadius: "9px", cursor: "pointer" }}
+                style={{
+                  background: "#b3372f",
+                  color: "white",
+                  border: "none",
+                  fontSize: "14px",
+                  fontWeight: 700,
+                  padding: "11px 22px",
+                  borderRadius: "9px",
+                  cursor: "pointer",
+                }}
               >
                 Supprimer
               </button>

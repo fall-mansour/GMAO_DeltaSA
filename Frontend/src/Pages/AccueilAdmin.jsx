@@ -1,15 +1,7 @@
-import React from "react";
+// Frontend/src/pages/AccueilAdmin.jsx
+import { useNavigate } from "react-router-dom";
 import "../style/Admin.css";
 import logo from "../assets/logo.png";
-
-/**
- * Page d'accueil - Administrateur
- * Application GMAO - Delta SA
- *
- * Affiche les chiffres clés et les 2 modules de gestion :
- * - Gestion des utilisateurs
- * - Gestion des camions (avec rattachement chauffeurs)
- */
 
 const EXEMPLE_STATS = {
   nbUtilisateurs: 18,
@@ -19,38 +11,79 @@ const EXEMPLE_STATS = {
 };
 
 export default function AccueilAdmin({
-  userName = "Administrateur",
   userInitials = "AD",
   stats = null,
-  onOpenUtilisateurs = () => {},
-  onOpenCamions = () => {},
-  onLogout = () => {},
+  onOpenUtilisateurs = null, // On passe à null par défaut
+  onOpenCamions = null, // On passe à null par défaut
 }) {
+  const navigate = useNavigate(); // Initialisé ici, maintenant disponible partout en dessous !
   const s = stats || EXEMPLE_STATS;
 
+  // Définition des fonctions locales de secours si aucune prop n'est fournie par le parent
+  const handleOpenUtilisateurs = () => {
+    if (onOpenUtilisateurs) {
+      onOpenUtilisateurs();
+    } else {
+      navigate("/Gestionutilisateur"); // Redirection par défaut (attention aux majuscules/minuscules de tes routes)
+    }
+  };
+
+  const handleOpenCamions = () => {
+    if (onOpenCamions) {
+      onOpenCamions();
+    } else {
+      navigate("/camions"); // Redirection par défaut
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    sessionStorage.clear();
+    navigate("/login");
+  };
+
   return (
-    <div className="admin-page">
+    <div
+      className="admin-page"
+      style={{ minHeight: "100vh", overflowY: "auto" }}
+    >
       <header className="admin-topbar">
-        <div className="mh-brand">
+        <div
+          className="mh-brand"
+          onClick={() => navigate("/admin")}
+          style={{ cursor: "pointer" }}
+        >
           <img src={logo} alt="Delta SA" className="brand-logo" />
           <span className="brand-divider" />
           <span className="admin-brand-suffix">GMAO</span>
         </div>
 
         <nav className="admin-nav">
-          <a className="admin-nav-link is-active" href="#modules">
+          <span
+            className="admin-nav-link is-active"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/admin")}
+          >
             Tableau de bord
-          </a>
-          <a
+          </span>
+          <span
             className="admin-nav-link"
-            onClick={onOpenUtilisateurs}
-            href="#utilisateurs"
+            onClick={
+              handleOpenUtilisateurs
+            } /* Utilisation de la fonction locale sécurisée */
+            style={{ cursor: "pointer" }}
           >
             Utilisateurs
-          </a>
-          <a className="admin-nav-link" onClick={onOpenCamions} href="#camions">
+          </span>
+          <span
+            className="admin-nav-link"
+            onClick={
+              handleOpenCamions
+            } /* Utilisation de la fonction locale sécurisée */
+            style={{ cursor: "pointer" }}
+          >
             Camions
-          </a>
+          </span>
         </nav>
 
         <div className="admin-user">
@@ -58,7 +91,11 @@ export default function AccueilAdmin({
             <div className="admin-avatar">{userInitials}</div>
           </div>
           <div className="admin-divider-vert" />
-          <button className="admin-logout" onClick={onLogout}>
+          <button
+            className="admin-logout"
+            onClick={handleLogout}
+            style={{ cursor: "pointer" }}
+          >
             Déconnexion
           </button>
         </div>
@@ -68,8 +105,8 @@ export default function AccueilAdmin({
         <p className="admin-eyebrow">Espace administrateur</p>
         <h1 className="admin-title">Tableau de bord</h1>
 
-        {/* CHIFFRES CLES */}
-        <section className="admin-stats" id="utilisateurs">
+        {/* CHIFFRES CLÉS */}
+        <section className="admin-stats">
           <div className="admin-stat-card">
             <span className="admin-stat-label">Utilisateurs</span>
             <span className="admin-stat-value">{s.nbUtilisateurs}</span>
@@ -93,8 +130,13 @@ export default function AccueilAdmin({
         </section>
 
         {/* MODULES */}
-        <section className="admin-modules" id="modules">
-          <div className="admin-module-card">
+        <section className="admin-modules">
+          {/* Clic sur la carte entière pour une meilleure UX */}
+          <div
+            className="admin-module-card"
+            onClick={handleOpenUtilisateurs}
+            style={{ cursor: "pointer" }}
+          >
             <div className="admin-module-icon">👤</div>
             <h2 className="admin-module-title">Gestion des utilisateurs</h2>
             <p className="admin-module-sub">
@@ -102,21 +144,21 @@ export default function AccueilAdmin({
               système : chauffeurs, mécaniciens, back office et responsable de
               maintenance.
             </p>
-            <button className="admin-module-btn" onClick={onOpenUtilisateurs}>
-              Gérer les utilisateurs
-            </button>
+            <button className="admin-module-btn">Gérer les utilisateurs</button>
           </div>
 
-          <div className="admin-module-card">
+          <div
+            className="admin-module-card"
+            onClick={handleOpenCamions}
+            style={{ cursor: "pointer" }}
+          >
             <div className="admin-module-icon">🚛</div>
             <h2 className="admin-module-title">Gestion des camions</h2>
             <p className="admin-module-sub">
               Enregistrer et gérer la flotte de camions, rattacher jusqu'à 2
               chauffeurs par camion, et suivre l'état de chaque véhicule.
             </p>
-            <button className="admin-module-btn" onClick={onOpenCamions}>
-              Gérer les camions
-            </button>
+            <button className="admin-module-btn">Gérer les camions</button>
           </div>
         </section>
       </main>

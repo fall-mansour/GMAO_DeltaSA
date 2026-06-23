@@ -21,6 +21,8 @@ import HomeMecano from "./Pages/Accueilmecano";
 import AffectationsMecano from "./Pages/AffectationMecano";
 import AccueilBackOffice from "./Pages/AccueilBackOffice";
 import Rapports from "./Pages/Rapports";
+import AccueilAdmin from "./Pages/AccueilAdmin";
+import GestionUtilisateurs from "./Pages/GestionUtilisateurs";
 
 function HomeWrapper() {
   const navigate = useNavigate();
@@ -57,28 +59,25 @@ function App() {
         <Route path="/Accueilchauffeur" element={<HomeChauffeur />} />
         <Route path="/Declaration" element={<Declaration />} />
         <Route path="/SuiviChauffeur" element={<SuiviChauffeur />} />
-
         {/* Espace Back Office */}
-
         <Route path="/HistoBackoff" element={<HistoriqueBackoffice />} />
         <Route path="/Accueilbackoff" element={<AccueilBackOffice />} />
         <Route path="/Rapport" element={<Rapports />} />
-
         {/* Connexion */}
         <Route path="/login" element={<Login />} />
-
         {/* Espace Mécanicien */}
         <Route path="/Accueilmeca" element={<HomeMecano />} />
         <Route path="/Affectationsmeca" element={<AffectationsMecano />} />
         <Route path="/Etatreparation" element={<SuiviReparation />} />
-
         {/* Espace Responsable Maintenance */}
         <Route path="/" element={<HomeWrapper />} />
         <Route path="/dashboard" element={<DashboardWrapper />} />
         <Route path="/declarations" element={<DeclarationsWrapper />} />
         <Route path="/interventions" element={<InterventionsWrapper />} />
-
+        /*Routes Admin gestion users*/
         <Route path="/camions" element={<GestionCamions />} />
+        <Route path="/AccueilAdmin" element={<AccueilAdmin />} />
+        <Route path="/Gestionutilisateur" element={<GestionUtilisateurs />} />
       </Routes>
     </Router>
   );
