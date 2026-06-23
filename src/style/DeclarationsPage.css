@@ -1,0 +1,331 @@
+/* ============================================================
+   DeclarationsPage.css
+   Page Declarations a traiter - Responsable de maintenance - GMAO Delta SA
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.dp-page {
+  font-family: "Segoe UI", Arial, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background: #eef3fb;
+  color: #1a1f29;
+}
+
+/* ---------- HEADER ---------- */
+
+.dp-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f3;
+  padding: 22px 56px;
+}
+
+.mh-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+
+.brand-logo {
+  height: 89px;
+  display: block;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 26px;
+  background: #d7dbe2;
+}
+
+
+
+.dp-brand-suffix {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.dp-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid #e2e8f3;
+  color: #1d6fd9;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.dp-back:hover {
+  background: #f3f8fe;
+}
+
+/* ---------- CONTENU ---------- */
+
+.dp-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 40px 100px;
+}
+
+.dp-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 20px;
+}
+
+.dp-eyebrow {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1d6fd9;
+  margin: 0 0 10px;
+}
+
+.dp-title {
+  font-size: 38px;
+  font-weight: 800;
+  margin: 0;
+  color: #11151b;
+}
+
+.dp-count-badge {
+  background: #1d6fd9;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ---------- LISTE VERTICALE ---------- */
+
+.dp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dp-card {
+  background: #ffffff;
+  border: 1px solid #dbe6f7;
+  border-radius: 16px;
+  padding: 28px 32px;
+  transition: 0.2s;
+}
+
+.dp-card.is-open {
+  border-color: #1d6fd9;
+  box-shadow: 0 8px 24px rgba(29, 111, 217, 0.1);
+}
+
+.dp-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.dp-card-main {
+  flex: 1;
+}
+
+.dp-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.dp-card-truck {
+  font-size: 20px;
+  font-weight: 800;
+  color: #11151b;
+}
+
+.dp-card-date {
+  font-size: 13.5px;
+  color: #8a90a0;
+}
+
+.dp-card-desc {
+  font-size: 15.5px;
+  color: #3a4150;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 620px;
+}
+
+.dp-card-action {
+  flex-shrink: 0;
+}
+
+.dp-btn-assign {
+  background: #1d6fd9;
+  color: #ffffff;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.15s;
+}
+
+.dp-btn-assign:hover {
+  background: #185fc0;
+}
+
+.dp-btn-assign.is-active {
+  background: #f0f4fb;
+  color: #1d6fd9;
+  border: 1px solid #c7d6ef;
+}
+
+/* ---------- FORMULAIRE INLINE D'AFFECTATION ---------- */
+
+.dp-assign-form {
+  margin-top: 26px;
+  padding-top: 26px;
+  border-top: 1px solid #eef1f6;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+.dp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dp-field label {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #5b6477;
+}
+
+.dp-field select,
+.dp-field input {
+  border: 1px solid #d7dbe2;
+  border-radius: 9px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #11151b;
+  background: #f9fbfe;
+}
+
+.dp-field select:focus,
+.dp-field input:focus {
+  outline: none;
+  border-color: #1d6fd9;
+  background: #ffffff;
+}
+
+.dp-field-hint {
+  font-size: 12.5px;
+  color: #8a90a0;
+}
+
+.dp-assign-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.dp-btn-cancel {
+  background: none;
+  border: 1px solid #d7dbe2;
+  color: #6b7280;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.dp-btn-cancel:hover {
+  background: #f5f6f8;
+}
+
+.dp-btn-confirm {
+  background: #1d6fd9;
+  color: white;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.dp-btn-confirm:hover {
+  background: #185fc0;
+}
+
+/* ---------- ETAT VIDE ---------- */
+
+.dp-empty {
+  border: 1px dashed #c7d6ef;
+  border-radius: 14px;
+  padding: 60px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.dp-empty-text {
+  font-size: 15px;
+  color: #8a90a0;
+  margin: 0;
+  text-align: center;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 760px) {
+  .dp-content {
+    padding: 32px 20px;
+  }
+
+  .dp-card-head {
+    flex-direction: column;
+  }
+
+  .dp-card-action {
+    width: 100%;
+  }
+
+  .dp-btn-assign {
+    width: 100%;
+  }
+
+  .dp-assign-form {
+    grid-template-columns: 1fr;
+  }
+}
