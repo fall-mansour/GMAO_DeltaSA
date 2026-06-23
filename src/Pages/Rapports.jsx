@@ -47,7 +47,7 @@ export default function Rapports() {
   const handleNav = (item) => {
     setActiveNav(item);
     if (item === "Accueil") navigate("/Accueilbackoff");
-    if (item === "Déclaration") navigate("/Declaration");
+    if (item === "Déclaration") navigate("/declaration-backoffice");
     if (item === "Historiques") navigate("/HistoBackoff");
     if (item === "Rapports") navigate("/Rapport");
   };

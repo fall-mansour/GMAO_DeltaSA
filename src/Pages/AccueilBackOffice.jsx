@@ -33,10 +33,11 @@ export default function AccueilBackOffice() {
   const handleNav = (item) => {
     setActiveNav(item);
     if (item === "Accueil") navigate("/Accueilbackoff");
+    if (item === "Déclaration") navigate("/declaration-backoffice");
     if (item === "Historiques") navigate("/HistoBackoff");
     if (item === "Rapports") navigate("/Rapport");
-    if (item === "Déclaration") navigate("/declaration-backoffice");
-    };
+  };
+
   return (
     <div style={styles.page}>
       <nav style={styles.navbar}>
@@ -125,15 +126,8 @@ const styles = {
     width: "100%",
     boxSizing: "border-box",
   },
-  logo: {
-    height: "80px",
-    width: "auto",
-    objectFit: "contain",
-  },
-  navLinks: {
-    display: "flex",
-    gap: "8px",
-  },
+  logo: { height: "80px", width: "auto", objectFit: "contain" },
+  navLinks: { display: "flex", gap: "8px" },
   navLink: {
     position: "relative",
     background: "none",
@@ -145,10 +139,7 @@ const styles = {
     borderRadius: "6px",
     fontFamily: "'Segoe UI', sans-serif",
   },
-  navLinkActive: {
-    color: "#1d4ed8",
-    fontWeight: "600",
-  },
+  navLinkActive: { color: "#1d4ed8", fontWeight: "600" },
   navUnderline: {
     position: "absolute",
     bottom: "-1px",
@@ -158,11 +149,7 @@ const styles = {
     backgroundColor: "#1d4ed8",
     borderRadius: "2px",
   },
-  avatarWrapper: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
+  avatarWrapper: { display: "flex", alignItems: "center", gap: "10px" },
   avatar: {
     width: "38px",
     height: "38px",
@@ -186,21 +173,9 @@ const styles = {
     cursor: "pointer",
     fontFamily: "'Segoe UI', sans-serif",
   },
-  hero: {
-    textAlign: "center",
-    padding: "48px 24px 24px",
-  },
-  heroTitle: {
-    fontSize: "38px",
-    fontWeight: "800",
-    color: "#0f172a",
-    margin: "0 0 10px",
-  },
-  heroSubtitle: {
-    fontSize: "16px",
-    color: "#64748b",
-    margin: 0,
-  },
+  hero: { textAlign: "center", padding: "48px 24px 24px" },
+  heroTitle: { fontSize: "38px", fontWeight: "800", color: "#0f172a", margin: "0 0 10px" },
+  heroSubtitle: { fontSize: "16px", color: "#64748b", margin: 0 },
   actionGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
@@ -228,21 +203,9 @@ const styles = {
     width: "100%",
     margin: "0 auto",
   },
-  actionIcon: {
-    fontSize: "36px",
-  },
-  actionTitle: {
-    fontSize: "20px",
-    fontWeight: "700",
-    color: "#0f172a",
-    margin: 0,
-  },
-  actionDesc: {
-    fontSize: "14px",
-    color: "#64748b",
-    lineHeight: "1.6",
-    margin: 0,
-  },
+  actionIcon: { fontSize: "36px" },
+  actionTitle: { fontSize: "20px", fontWeight: "700", color: "#0f172a", margin: 0 },
+  actionDesc: { fontSize: "14px", color: "#64748b", lineHeight: "1.6", margin: 0 },
   btnFilled: {
     marginTop: "8px",
     padding: "13px 28px",
